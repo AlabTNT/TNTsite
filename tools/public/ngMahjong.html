@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NG Mahjong (NG麻将)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>NG Mahjong</h1>
+  </header>
+  
+  <main>
+    <div id="join-screen" class="card">
+      <h2>Join or Create a Room</h2>
+      <p>Enter a room ID. If it doesn't exist, it will be created automatically.</p>
+      <input type="text" id="username" placeholder="Your Nickname" autocomplete="off">
+      <input type="text" id="room-id" placeholder="Room ID (e.g. 1234)" autocomplete="off">
+      <button id="join-btn">Join Room</button>
+    </div>
+
+    <div id="room-screen" class="card hidden">
+      <h2>Room: <span id="room-display"></span></h2>
+      <p>Your Role: <span id="role-display" class="badge"></span></p>
+      
+      <div style="margin-top: 1rem; margin-bottom: 1rem;">
+        <button id="start-btn" class="hidden">Start Game</button>
+      </div>
+
+      <div>
+        <h3>Players & NG Words</h3>
+        <div id="players-container" class="player-grid">
+          <!-- Players injected here -->
+        </div>
+      </div>
+      
+      <div style="margin-top: 2rem;">
+        <h3>Spectators</h3>
+        <ul id="spectators-list">
+          <!-- Spectators injected here -->
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>

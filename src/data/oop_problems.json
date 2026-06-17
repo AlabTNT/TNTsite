@@ -1,0 +1,2089 @@
+{
+  "W1": [
+    {
+      "title": "7-1 删除字符串中的子串",
+      "score": "20",
+      "author": "白洪欢",
+      "organization": "浙江大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>输入2个字符串S1和S2，要求删除字符串S1中出现的所有子串S2，即结果字符串中不能包含S2。</p>\n<h3 id=\"输入格式：\">输入格式：</h3>\n<p>输入在2行中分别给出不超过80个字符长度的、以回车结束的2个非空字符串，对应S1和S2。</p>\n<h3 id=\"输出格式：\">输出格式：</h3>\n<p>在一行中输出删除字符串S1中出现的所有子串S2后的结果字符串。</p>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>Tomcat is a male ccatat\ncat</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>Tom is a male </code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint main(){\n    string a,b;\n    getline(cin,a);\n    getline(cin,b);\n    size_t p;\n    while((p=a.find(b)) != string::npos) a.erase(p,b.length());\n    cout << a << endl;\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "title": "7-2 Left-pad",
+      "score": "20",
+      "author": "陈越",
+      "organization": "浙江大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>根据新浪微博上的消息，有一位开发者不满NPM（Node Package Manager）的做法，收回了自己的开源代码，其中包括一个叫left-pad的模块，就是这个模块把javascript里面的React/Babel干瘫痪了。这是个什么样的模块？就是在字符串前填充一些东西到一定的长度。例如用<code>*</code>去填充字符串<code>GPLT</code>，使之长度为10，调用left-pad的结果就应该是<code>******GPLT</code>。Node社区曾经对left-pad紧急发布了一个替代，被严重吐槽。下面就请你来实现一下这个模块。</p>\n<h3 id=\"输入格式：\">输入格式：</h3>\n<p>输入在第一行给出一个正整数<code>N</code>（<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mrow><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup></mrow>\\le 10^4</math></span><span aria-hidden=\"true\" class=\"katex-html\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7719400000000001em;vertical-align:-0.13597em;\"></span><span class=\"mrel\">≤</span><span class=\"mspace\" style=\"margin-right:0.2777777777777778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.8141079999999999em;vertical-align:0em;\"></span><span class=\"mord\">1</span><span class=\"mord\"><span class=\"mord\">0</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8141079999999999em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">4</span></span></span></span></span></span></span></span></span></span></span>）和一个字符，分别是填充结果字符串的长度和用于填充的字符，中间以1个空格分开。第二行给出原始的非空字符串，以回车结束。</p>\n<h3 id=\"输出格式：\">输出格式：</h3>\n<p>在一行中输出结果字符串。</p>\n<h3 id=\"输入样例1：\">输入样例1：</h3>\n<pre><code>15 _\nI love GPLT</code></pre>\n<h3 id=\"输出样例1：\">输出样例1：</h3>\n<pre><code>____I love GPLT</code></pre>\n<h3 id=\"输入样例2：\">输入样例2：</h3>\n<pre><code>4 *\nthis is a sample for cut</code></pre>\n<h3 id=\"输出样例2：\">输出样例2：</h3>\n<pre><code> cut</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include<iostream>\n#include<string>\nusing namespace std;\n\nint main(){\n    int n;\n    char a;\n    string s;\n    cin >> n >> a;\n    cin.ignore();\n    getline(cin,s);\n    if(s.length()==n){\n        cout << s << endl;\n    } else if (s.length() > n){\n        cout << s.substr(s.length()-n) << endl;\n    } else {\n        int x=n-s.length();\n        cout << string(x, a)+s << endl;\n    }\n    \n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "250 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "title": "7-3 字符串排序--string类的使用",
+      "score": "20",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>先输入你要输入的字符串的个数。然后换行输入该组字符串。每个字符串以回车结束，每个字符串不多于一百个字符。<br/>如果在输入过程中输入的一个字符串为“stop”，也结束输入。<br/>然后将这输入的该组字符串按每个字符串的长度，由小到大排序，按排序结果输出字符串。如果存在多个字符串长度相同，则按照原始输入顺序输出。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>字符串的个数，以及该组字符串。每个字符串以‘\\n’结束。如果输入字符串为“stop”，也结束输入.</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>可能有多组测试数据，对于每组数据，<br/>将输入的所有字符串按长度由小到大排序输出(如果有“stop”，不输出“stop”)。</p>\n<h3 id=\"输入样例\">输入样例:</h3>\n<pre><code>4\nfaeruhyytrjh tjytj\nhsrthts   hjnshtgfhs\nstop\n3\nhtrskbns\nbsartanjsf tyjndyt\nnsr jj jtey</code></pre>\n<h3 id=\"输出样例\">输出样例:</h3>\n<pre><code>faeruhyytrjh tjytj\nhsrthts   hjnshtgfhs\nhtrskbns\nnsr jj jtey\nbsartanjsf tyjndyt</code></pre>\n<p>###提示：<br/>根据输入的字符串个数来动态分配存储空间（采用new()函数）。每个字符串会少于100个字符。<br/>测试数据有多组，注意使用while()循环输入。</p>\n<p>###来源：<br/>数据结构高分笔记</p>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main(){\n    int n;\n    while(cin >> n){\n        cin.ignore();\n        vector<string> strs;\n        string s;\n        for(int i=0;i<n;i++){\n            getline(cin,s);\n            if(s==\"stop\") break;\n            strs.push_back(s);\n        }\n        stable_sort(strs.begin(),strs.end(),[](const string &a, const string &b){return a.length() < b.length();});\n        for(auto& str : strs){\n            cout << str << endl;\n        }\n    }\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "title": "7-4 九宫格输入法",
+      "score": "20",
+      "author": "周强",
+      "organization": "青岛大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>假设有九宫格输入法键盘布局如下：</p>\n<pre><code> [ 1,.?! ] [ 2ABC ] [ 3DEF  ]\n [ 4GHI  ] [ 5JKL ] [ 6MNO  ]\n [ 7PQRS ] [ 8TUV ] [ 9WXYZ ]\n           [ 0空  ]</code></pre>\n<p> 注意：中括号<code>[ ]</code>仅为了表示键盘的分隔，不是输入字符。每个中括号中，位于首位的数字字符即是键盘的按键，按一下即可输入该数字字符。多次按同一个键，则输入的字符依次循环轮流，例如按两次<code>3</code>，则输入<code>D</code>；按5次<code>7</code>，则输入<code>S</code>；按6次<code>2</code>，则输入<code>A</code>。按键<code>0</code>的输入组合是<code>0</code>和<code>空格</code>字符，即按两次<code>0</code>输入空格。</p>\n<p>你需要对于给定的按键组合，给出该组合对应的文本。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>输入在一行中给出数个字符的按键组合（例如 <code>999</code> 表示按3次<code>9</code>），每个字符的按键组合之间用空格间隔，最后一个输入法组合之后以换行结束。输入数据至少包括一个字符的按键组合，且输入总长度不超过500个字符。</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>在一行中输出该按键组合对应的文本。</p>\n<h3 id=\"输入样例\">输入样例:</h3>\n<pre><code>22 5555 22 666 00 88 888 7777 4444 666 44</code></pre>\n<h3 id=\"输出样例\">输出样例:</h3>\n<pre><code>ALAN TURING</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\n#include <string>\n#include <sstream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main(){\n    unordered_map<char,string> mp = {\n        {'1',\"1,.?!\"},\n        {'2',\"2ABC\"},\n        {'3',\"3DEF\"},\n        {'4',\"4GHI\"},\n        {'5',\"5JKL\"},\n        {'6',\"6MNO\"},\n        {'7',\"7PQRS\"},\n        {'8',\"8TUV\"},\n        {'9',\"9WXYZ\"},\n        {'0',\"0 \"}\n    };\n    string s;\n    getline(cin,s);\n    stringstream ss(s);\n    string t;\n    vector<string> al;\n    while (ss>>t){\n        al.push_back(t);\n    }\n    string result;\n    for(auto& str : al){\n        string &chars=mp[str[0]];\n        int len=str.length();\n        char output = chars[(len - 1) % chars.length()];\n        result += output;\n    }\n    cout << result << endl;",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "author": "余春艳",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>（       ）不是面向对象程序设计的主要特征。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>封装</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>继承</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>多态</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>结构</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "余春艳",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>关于C++与C 语言关系的描述中，（       ）是错误的。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 语言是C++语言的一个子集</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 语言与C++语言是兼容的</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C++语言对C 语言进行了一些改进</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C++语言和C 语言都是面向对象的</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列关于cin和cout的说法中，错误的是____。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cin用于读入用户输入的数据</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout用于输出数据</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cin比C语言中的scanf()函数更有优势，它可以读取空格</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout通常与&lt;&lt;运算符结合</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "董俊",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列语句中，不能连续输出3个值的是。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout&lt;&lt;x&lt;&lt;y&lt;&lt;z;</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout&lt;&lt;x,y,z;</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout&lt;&lt;x; cout&lt;&lt;y; cout&lt;&lt;z;</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>cout&lt;&lt;(x,y,z)&lt;&lt;(x,y,z)&lt;&lt;(x,y,z);</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        }
+      ],
+      "result": "答案错误",
+      "q_type": "single"
+    },
+    {
+      "author": "张丽娜",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在C++中，cin是（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>预定义的类</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>预定义的函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>一个标准的语句</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>预定义的对象</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>使用操作符setw对数据进行格式输出时，需要包含（）文件。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>iostream.h</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>fstream.h</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>iomanip.h</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>stdlib.h</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄龙军",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>有代码如下：</p>\n<pre><code>int n;\nstring s;\ncin&gt;&gt;n;\ngetline(cin, s);\ncout&lt;&lt;s.size()&lt;&lt;endl;</code></pre>\n<p>则在输入以下数据后得到结果是（     ）。</p>\n<pre><code>1\nHello World</code></pre>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>11</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>0</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>5</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>12</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>关于 C++与 C 语言关系的描述中，（ ）是错误的。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 语言是 C++语言的一个子集</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 语言与 C++语言是兼容的</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C++语言对 C 语言进行了一些改进</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C++语言和 C 语言都是面向对象的</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "李祥",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>关于面向对象程序设计</p>\n<p>面向对象程序设计主要考虑的是提高软件的 ▁▁▁▁▁。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>可靠性</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>可移植性</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>可修改性</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>可重用性</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        }
+      ],
+      "result": "答案错误",
+      "q_type": "single"
+    },
+    {
+      "author": "刘海",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C++在C语言的注释方式基础上增加了（  ）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>多行注释</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>单行注释</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>块注释</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>星号注释</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W2": [
+    {
+      "author": "海洋饼干叔叔",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>从键盘读入数量不确定的正整数，然后从中找出出现次数最多的数。操作者输入-1表示结束输入。后台测试用例确保至少输入一个正整数，且众数唯一。</p>\n<p>请将下述程序补充完整，使其能正常运行，找出众数。</p>\n<p>#include <br/>#include <br/>using namespace std;</p>\n<p>int main() {<br/>    vector&lt;int&gt; a;<br/>    while (true){<br/>        int i;<br/>        cin &gt;&gt; i;<br/>        if <span data-blank-index=\"0\" data-content=\"\" data-group-id=\"undefined\" data-multiple-line=\"false\" data-score=\"undefined\" id=\"blank8\"><span class=\"inline-flex\"><input class=\"max-w-full flex-auto block py-1.5 px-3 text-normal bg-bg-base border border-[#ced4da] dark:border-lightest rounded transition-[border-color,box-shadow] motion-reduce:transition-none [&amp;:not(:disabled):not([readonly])]:focus:border-primary [&amp;:not(:disabled):not([readonly])]:focus:ring-2 focus:ring-[rgba(10,73,145,0.25)] focus:!outline-none placeholder:text-lightest disabled:bg-bg-light disabled:cursor-not-allowed rounded-r-none text-[1em] leading-none\" disabled=\"\" style=\"max-width: none; width: 19.2ch; max-height: 500px;\" value=\"(~i)\"/><span class=\"-ml-px flex items-center px-1.5 border border-[#ced4da] dark:border-lightest rounded-r-sm bg-bg-normal whitespace-nowrap text-[1em] leading-none\"><span class=\"font-sans select-none\">2 分</span></span></span></span><br/>            a.push_back(i);<br/>        else<br/> <span data-blank-index=\"1\" data-content=\"\" data-group-id=\"undefined\" data-multiple-line=\"false\" data-score=\"undefined\" id=\"blank9\"><span class=\"inline-flex\"><input class=\"max-w-full flex-auto block py-1.5 px-3 text-normal bg-bg-base border border-[#ced4da] dark:border-lightest rounded transition-[border-color,box-shadow] motion-reduce:transition-none [&amp;:not(:disabled):not([readonly])]:focus:border-primary [&amp;:not(:disabled):not([readonly])]:focus:ring-2 focus:ring-[rgba(10,73,145,0.25)] focus:!outline-none placeholder:text-lightest disabled:bg-bg-light disabled:cursor-not-allowed rounded-r-none text-[1em] leading-none\" disabled=\"\" style=\"max-width: none; width: 19.2ch; max-height: 500px;\" value=\"break;\"/><span class=\"-ml-px flex items-center px-1.5 border border-[#ced4da] dark:border-lightest rounded-r-sm bg-bg-normal whitespace-nowrap text-[1em] leading-none\"><span class=\"font-sans select-none\">2 分</span></span></span></span><br/>    }</p>\n<pre><code>int iMaxCount = 0;\nint iMode = a[0];\nfor (auto x:a){\n    int iCount = 0;\n    for (2 分){\n        if (x==y)\n            iCount++;\n    }\n\n    if (iCount2 分iMaxCount){\n        iMaxCount = iCount;\n 2 分x;\n    }\n}\n\ncout &lt;&lt; \"The mode is \" &lt;&lt; iMode;\nreturn 0;</code></pre>\n<p>}</p>\n<p>输入示例：</p>\n<pre><code>3\n2\n1\n33\n3\n3\n4\n-1</code></pre>\n<p>输出示例：</p>\n<pre><code>The mode is 3</code></pre>\n<h3 id=\"感觉不会？--那试着听听免费的b站网课\"><strong>感觉不会？  那试着听听免费的B站网课</strong></h3>\n<p><a href=\"https://www.bilibili.com/video/BV1kt411R7uW/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1kt411R7uW/\">《Python编程基础及应用》（高等教育出版社）配套在线课程</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1it411d7zx/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1it411d7zx/\">《C++编程基础及应用》（高等教育出版社）配套在线课程</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1iL411t7UZ/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1iL411t7UZ/\">《Python编程基础及应用》教材习题讲解</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1Wt4y1A7sr/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1Wt4y1A7sr/\">《C++编程基础及应用》教材习题讲解</a><br/><img alt=\"image.png\" src=\"./W2_blank_files/6e79c9e3-cb7f-486d-ab78-36b5a8f655c0.png\"/></p>\n</div>",
+      "options": [],
+      "result": "答案正确",
+      "q_type": "blank"
+    },
+    {
+      "author": "海洋饼干叔叔",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>幼稚园阿姨发糖，先到先得。请查询资料，使用队列（queue）容器模拟幼稚园小朋友Jack、Mary、Tom、Angela和Alex依次到达（入队）并依次出队领糖的过程。<br/><br/></p>\n<pre><code>#include &lt;iostream&gt;\n2 分\nusing namespace std;\n\nint main()\n{\n    queue&lt;2 分&gt; q;\n    q.push(\"Jack\");\n    q.push(\"Mary\");\n    q.push(\"Tom\");\n    q.push(2 分);\n    q.push(\"Alex\");\n\n    while (!q.empty()){\n        string s = q.front();\n 2 分\n        cout &lt;&lt; 2 分 &lt;&lt; \" get candy.\" &lt;&lt; endl;\n    }\n\n    return 0;\n}</code></pre>\n<p>程序期望的输出：</p>\n<pre><code>Jack get candy.\nMary get candy.\nTom get candy.\nAngela get candy.\nAlex get candy.</code></pre>\n<h3 id=\"感觉不会？--那试着听听免费的b站网课\"><strong>感觉不会？  那试着听听免费的B站网课</strong></h3>\n<p><a href=\"https://www.bilibili.com/video/BV1kt411R7uW/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1kt411R7uW/\">《Python编程基础及应用》（高等教育出版社）配套在线课程</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1it411d7zx/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1it411d7zx/\">《C++编程基础及应用》（高等教育出版社）配套在线课程</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1iL411t7UZ/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1iL411t7UZ/\">《Python编程基础及应用》教材习题讲解</a></p>\n<p><a href=\"https://www.bilibili.com/video/BV1Wt4y1A7sr/\" target=\"_blank\" title=\"https://www.bilibili.com/video/BV1Wt4y1A7sr/\">《C++编程基础及应用》教材习题讲解</a><br/><img alt=\"image.png\" src=\"./W2_blank_files/6e79c9e3-cb7f-486d-ab78-36b5a8f655c0.png\"/></p>\n</div>",
+      "options": [],
+      "result": "部分正确",
+      "q_type": "blank"
+    },
+    {
+      "title": "6-1 筛法求质数",
+      "score": "20",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>本题要求使用筛法求出1~N以内的质数。</p>\n<h3 id=\"函数接口定义：\">函数接口定义：</h3>\n<pre><code>vector&lt;int&gt; sieve(int n); //函数声明, 求n以内的质数</code></pre>\n<p>求<code>n</code>以内的质数。其中 <code>n</code>是传入的参数。<code>n</code> 的值不超过10 000 000的范围； 求出的质数存入容器vector并返回。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\n#include &lt;vector&gt;\nusing namespace std;\n\nvector&lt;int&gt; sieve(int n); //函数声明,求n以内的质数\n\nint main(int argc, char const *argv[])\n{\n int n;\n cin &gt;&gt; n;\n\n vector&lt;int&gt; ans = sieve(n);\n\n cout &lt;&lt; ans.size() &lt;&lt; endl;\n for (int i = 0; i &lt; ans.size(); i++) {\n cout &lt;&lt; ans[i];\n if (i &lt; ans.size() - 1)cout &lt;&lt; \" \";\n }\n cout &lt;&lt; endl;\n\n return 0;\n}\n\n/* 请在这里填写答案 */</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<p>输入在一行中给出一个正整数N，其值不超过10 000 000。</p>\n<pre><code>10</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<p>输出首先在一行中输出指定范围内的质数个数，然后在另一行输出指定范围内的所有质数，以空格分隔，但是最后一个质数后面没有多余空格。</p>\n<pre><code>4\n2 3 5 7</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <bitset>\n\nvector<int> sieve(int n){\n    // char num[n+1];\n    bitset <10000001> num;\n    vector<int> ret;\n    for(int i=0;i<=n;i++){\n        num[i]=1;\n    }\n    num[2]=1;\n    for (int i=2; i<=n; i++){\n        if (num[i]){\n            for (int j=2*i;j<=n;j+=i){\n                num[j]=0;\n            }\n            ret.push_back(i);\n        }\n    }\n    return ret;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "7-1 众数",
+      "score": "10",
+      "author": "小黑",
+      "organization": "临沂大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>给出若干个正整数，请找出出现次数最多的数。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>在一行中输入若干个数，以空格间隔（读入数的总个数不超过5000）。</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>输出出现次数最多的数（若答案不唯一，输出最小的那个）。</p>\n<h3 id=\"输入样例\">输入样例:</h3>\n<p>在这里给出一组输入。例如：</p>\n<pre><code>18 999 999 2100000000</code></pre>\n<h3 id=\"输出样例\">输出样例:</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>999</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <bits/stdc++.h>\nusing namespace std;\n\nstruct a{\n    int k, v;\n    a (int a, int b){\n        k=a;v=b;\n    }\n    bool operator < (const a& b) const {\n        return v == b.v ? k > b.k : v < b.v;\n    }\n};\n\nint main(){\n    map<int, int> m;\n    int n;\n    while (cin >> n){\n        if (m.count(n) > 0){\n            m[n]++;\n        }\n        else{\n            m[n] = 1;\n        }\n    }\n    priority_queue <a> q;\n    for (auto x:m){\n        q.push(a(x.first, x.second));\n    }\n    cout << q.top().k;\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "title": "7-2 括号匹配问题",
+      "score": "10",
+      "author": "王宇",
+      "organization": "集美大学诚毅学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>假设一个表达式或一段程序中含有三种括号圆括号“(”和“)”、方括号“[”和“]”、花括号“{”和”}”。试写一个程序判别给定的表达式或程序中所含括号是否正确配对出现,可以使用C++ STL解决问题。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>输入一个只含有括号的表达式</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>输出一个“DO NOT MATCH”或”DO MATCH”，表明正确匹配与否</p>\n<br/>\n<br/>\n<h3 id=\"输入样例1\">输入样例1:</h3>\n<p>在这里给出一组输入。例如：</p>\n<pre><code>{{{[]()}[()]}}</code></pre>\n<h3 id=\"输出样例1\">输出样例1:</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>DO MATCH\n</code></pre>\n<h3 id=\"输入样例2\">输入样例2:</h3>\n<p>在这里给出一组输入。例如：</p>\n<pre><code>{{]])</code></pre>\n<h3 id=\"输出样例2\">输出样例2:</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>DO NOT MATCH\n</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    stack <char> s;\n    char a=getchar();\n    char b;\n    while (~a){\n        if (s.empty()){\n            s.push(a);\n        }\n        else{\n            b = s.top();\n            if (a == 91 || a == 40 || a == 123){\n                s.push(a);\n            }\n            else if (a == b+1 || a == b+2){\n                s.pop();\n            }\n            else{\n                cout << \"DO NOT MATCH\" << endl;\n                return 0;\n            }\n        }\n        a = getchar();\n    }\n    cout << \"DO MATCH\" << endl;\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>若有下面的语句：</p>\n<pre><code>vector&lt;int&gt; v;\nfor (int i = 0; i &lt; 4; i++)\n v.push_back(i + 1);\ncout &lt;&lt; v.size() &lt;&lt; endl;</code></pre>\n<p>则执行后程序的输出结果是</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>2</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>3</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>4</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "孔德桢",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设有定义 <code>vector&lt;string&gt; v(10); </code><br/>执行下列哪条语句时会调用构造函数?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>v[0] += \"abc\"; </code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>v[0] = \"2018\";</code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>v.push_back(\"ZUCC\");</code></p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>cout &lt;&lt; (v[1] == \"def\"); </code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "孔德桢",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设有如下代码段:</p>\n<pre><code>std::map&lt;char *, int&gt; m;\nconst int MAX_SIZE = 100;\nint main() {\n    char str[MAX_SIZE];\n    for (int i = 0; i &lt; 10; i++) {\n        std::cin &gt;&gt; str;\n        m[str] = i;\n    }\n    std::cout &lt;&lt; m.size() &lt;&lt; std::endl;\n}\n</code></pre>\n<p>读入10个字符串，则输出的 <code>m.size()</code> 为</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>0</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>10</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        }
+      ],
+      "result": "答案错误",
+      "q_type": "single"
+    },
+    {
+      "author": "刘莹",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列关于STL的描述中，错误的是。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>STL的内容从广义上讲分为容器、迭代器、算法三个主要部分</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>STL的一个基本理念就是将数据和操作分离</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>STL中的所有组件都由模板构成，其元素可以是任意类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>STL的容器、迭代器、算法是三个完全独立的部分，彼此也无任何联系</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "刘莹",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列创建vector容器对象的方法中，错误的是。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>vector&lt;int&gt; v(10);</code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>vector&lt;int&gt; v(10, 1);</code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>vector&lt;int&gt; v{10, 1};</code></p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p><code>vector&lt;int&gt; v = (10, 1);</code></p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "刘莹",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列选项中，哪一项不是迭代器。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>输入迭代器</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>前向迭代器</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>双向迭代器</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>删除迭代器</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄龙军",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>执行以下代码后，k的值是(     )。</p>\n<pre><code>string s=\"123456\", t=\"7788\";\nint k=s.find(t);</code></pre>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>4294967295</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>-1</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>0</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>0xfffffffe</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄龙军",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以下代码的输出结果是(     )。</p>\n<pre><code>string s=\"123\";    \nchar c='a';\ncout &lt;&lt; s+c &lt;&lt; endl;</code></pre>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>语句出错</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>188</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>123a</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>12310</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄龙军",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>有代码如下：</p>\n<pre><code>    string s;\n    cin&gt;&gt;s;\n    cout&lt;&lt;s&lt;&lt;endl;</code></pre>\n<p>输入以下字符串，以上语句输出的是(     )。</p>\n<pre><code>123 abc</code></pre>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>123 abc</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>123</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>abc</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>123abc</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄龙军",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>关于STL之stack和queue的以下说法中，错误的是(    )。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>stack的push方法（成员函数）用于将元素入栈</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>queue的push方法（成员函数）用于将元素入队</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>queue的front方法（成员函数）用于取得队头元素</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>stack的top方法（成员函数）用于取得栈顶元素的下标</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W3": [
+    {
+      "title": "6-1 类的声明和成员函数的实现",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>声明了一个Dog类，包含了age，weight等属性，以及对这些属性进行操作的方法。请实现该类的成员函数。</p>\n<h3 id=\"dog类声明如下：\">Dog类声明如下：</h3>\n<pre><code>class Dog {\npublic:\n void setAge(int a);\n int getAge();\n void setWeight(int w);\n int getWeight();\nprivate:\n int age, weight;\n};</code></pre>\n<p>请实现Dog类的成员函数。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\nusing namespace std;\n\nclass Dog {\npublic:\n void setAge(int a);\n int getAge();\n void setWeight(int w);\n int getWeight();\nprivate:\n int age, weight;\n};\n\nint main()\n{\n Dog d;\n int a, w;\n cin &gt;&gt; a &gt;&gt; w;\n d.setAge(a);\n d.setWeight(w);\n cout &lt;&lt; d.getAge() &lt;&lt; endl;\n cout &lt;&lt; d.getWeight() &lt;&lt; endl;\n return 0;\n}\n\n/* 你的代码将被嵌在这里 */</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>1 3</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>1\n3</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "void Dog::setAge(int a){\n    this->age = a;\n}\nint Dog::getAge(){\n    return this->age;\n}\nvoid Dog::setWeight(int w){\n    this->weight = w;\n}\nint Dog::getWeight(){\n    return this->weight;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-2 类的声明和成员函数的实现--this指针",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>本题要求声明和实现一个Car类，包括实现其成员函数。<br/><br/>要求如下：<br/></p>\n<h3 id=\"类和函数接口定义：\">类和函数接口定义：</h3>\n<pre><code>1. 声明一个Car类;\n2. 三个public成员函数:\n(1) disp_welcomemsg()，无返回类型;\n(2) get_wheels()，返回一个Car类的数据成员m_nWheels的值；\n(3) set_wheels(int)，用指定的形参初始化数据成员m_nWheels的值；\n3. 一个私有数据成员m_nWheels，整数类型，代表汽车的车轮数量。\n</code></pre>\n<p>其中，成员函数<code>disp_welcomemsg()</code>显示一条欢迎信息“<code>Welcome to the car world!</code>”。<br/>成员函数<code>get_wheels()</code>返回Car类的私有数据成员<code>m_nWheels</code>。<br/>成员函数<code>set_wheels(int)</code>用指定的形参初始化数据成员<code>m_nWheels</code>。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\nusing namespace std;\n\n/* 请在这里填写答案 */\n\nint main()\n{\n int n;\n cin &gt;&gt; n;\n Car myfstcar, myseccar;    //定义类对象\n myfstcar.disp_welcomemsg();//访问成员函数，显示欢迎信息\n myfstcar.set_wheels(n);    //访问成员函数，设置车轮数量\n myseccar.set_wheels(n+4);  //访问成员函数，设置车轮数量\n //访问成员函数，显示车轮数量\n cout &lt;&lt; \"my first car wheels num = \" &lt;&lt; myfstcar.get_wheels() &lt;&lt; endl;\n cout &lt;&lt; \"my second car wheels num = \" &lt;&lt; myseccar.get_wheels() &lt;&lt; endl;\n\n return 0;\n}\n</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>4</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>Welcome to the car world!\nmy first car wheels num = 4\nmy second car wheels num = 8</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "class Car{\n    private:\n    int m_nWheels;\n    public:\n    void disp_welcomemsg(){\n        std::cout << \"Welcome to the car world!\" << endl;\n    }\n    int get_wheels(){\n        return this->m_nWheels;\n    }\n    void set_wheels(int a){\n        this->m_nWheels = a;\n    }\n};",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-3 定义点类",
+      "score": "10",
+      "author": "范鹏程",
+      "organization": "内蒙古师范大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>根据main（）中的调用形式，定义一个点类（完成数据成员与成员函数的定义），将点的坐标显示在屏幕上。</p>\n<h3 id=\"类定义：\">类定义：</h3>\n<pre><code>定义点类Point：\nclass Point \n{\n ... \n};</code></pre>\n<h3 id=\"测试主函数样例：\">测试主函数样例：</h3>\n<pre><code>在这里给出函数被调用进行测试的例子。例如：\nint main()\n{\n Point p1,p2;\n p1.setXY(1,2);\n p2.setXY(3,4);\n cout&lt;&lt;\"x of Point p1：\"&lt;&lt;p1.getX()&lt;&lt;endl;\n cout&lt;&lt;\"y of Point p2：\"&lt;&lt;p1.getY()&lt;&lt;endl;\n cout&lt;&lt;\"Point P2:(\"&lt;&lt;p2.getX()&lt;&lt;\",\"&lt;&lt;p2.getY()&lt;&lt;\")\"&lt;&lt;endl;\n return 0;\n}\n/* 请在这里填写答案 */</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>无</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>x of Point p1：1\ny of Point p2：2\nPoint P2:(3,4)</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "class Point{\n    private:\n    int x, y;\n    public:\n    void setXY(int x, int y){\n        this->x = x;\n        this->y = y;\n    }\n    int getX(){\n        return this->x;\n    }\n    int getY(){\n        return this->y;\n    }\n};",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "author": "陈晓梅",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>假定AA为一个类，a()为该类公有的函数成员，x为该类的一个对象，则访问x对象中函数成员a()的格式为（）</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>x.a</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>x.a()</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>x-&gt;a()</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>(*x).a()</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列关于类定义的说法中，正确的是</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类定义中包括数据成员和函数成员的声明</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类成员的缺省访问权限是保护的</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>数据成员必须被声明为私有的</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>成员函数只能在类体外进行定义</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列关于类和对象的叙述中，错误的是</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>一个类只能有一个对象</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>对象是类的具体实例</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类是对某一类对象的抽象</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类和对象的关系是一种数据类型与变量的关系</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "翁恺",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Resolver <code>::</code> is used to:</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Define a member function outside class declaration</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Access a member of a namespace</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Access a static member of a class</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>All of the others</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "陈晓梅",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类的实例化是指（   ）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>定义类</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>定义对象</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>调用类的成员函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>访问对象的数据成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "范鹏程",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C＋＋函数的声明和定义可以分开。函数声明不需要(       )。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>返回类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数名</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>参数表</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数体</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "范鹏程",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在面向对象的程序设计中，首先需要在问题域中识别出若干个（ ）</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>文件</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>过程</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W4": [
+    {
+      "title": "6-1 Point类的声明和实现",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>定义一个Point类，代表平面上的一个点，其横坐标和纵坐标分别用x和y表示，设计Point类的成员函数，实现并测试这个类。<br/>主函数中输入两个点的坐标，计算并输出了两点间的距离。请根据主函数实现Point类。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\n#include &lt;iomanip&gt;\n#include &lt;cmath&gt;\nusing namespace std;\n\n//你的代码将被嵌在这里\n\nint main()\n{\n Point p1, p2;\n double x1, y1, x2, y2;\n cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;\n p1.setX(x1);\n p1.setY(y1);\n p2.setX(x2);\n p2.setY(y2);\n double x = p1.getX() - p2.getX();\n double y = p1.getY() - p2.getY();\n double len = sqrt(x * x + y * y);\n cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; len &lt;&lt; endl;\n return 0;\n}\n</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>0 0 3 3</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>4.24</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "class Point{\n    private:\n    double x, y;\n    public:\n    void setX(double x){\n        this->x = x;\n    }\n    void setY(double y){\n         this->y = y;\n    }\n    double getX(){\n        return this->x;\n    }\n    double getY(){\n        return this->y;\n    }\n};",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-2 类的声明与成员函数的实现--Car类",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>本题要求根据给定的Car类的声明，实现其成员函数。</p>\n<h3 id=\"类和函数接口定义：\">类和函数接口定义：</h3>\n<pre><code>class Car //定义类Car\n{\n //成员函数\npublic:\n void disp_welcomemsg(); //显示欢迎信息\n int get_wheels();       //返回汽车的车轮数量\n void set_wheels(int);   //设置汽车的车轮数量\n //数据成员\nprivate:\n int m_nWheels;    //汽车的车轮数量\n};</code></pre>\n<p>其中，成员函数<code>void disp_welcomemsg()</code>显示一条欢迎信息“<code>Welcome to the car world!</code>”。<br/>成员函数<code>int get_wheels()</code>返回Car类的私有数据成员<code>m_nWheels</code>。<br/>成员函数<code>int set_wheels(int)</code>用指定的形参初始化数据成员<code>m_nWheels</code>。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\nusing namespace std;\n\nclass Car //定义类Car\n{\n //成员函数\npublic:\n void disp_welcomemsg(); //显示欢迎信息\n int get_wheels();       //返回汽车的车轮数量\n void set_wheels(int);   //设置汽车的车轮数量\n //数据成员\nprivate:\n int m_nWheels;    //显示汽车的车轮数量\n};\n\n/* 请在这里填写答案 */\n\nint main()\n{\n int n;\n cin &gt;&gt; n;\n Car mycar;     //定义类对象mycar\n mycar.disp_welcomemsg();  //访问成员函数，显示欢迎信息\n mycar.set_wheels(n);      //访问成员函数，设置车轮数量\n //访问成员函数，显示车轮数量\n cout &lt;&lt; \"wheels = \" &lt;&lt; mycar.get_wheels() &lt;&lt; endl;\n return 0;\n}\n</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>4</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>Welcome to the car world!\nwheels = 4</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "void Car::disp_welcomemsg(){\n    cout << \"Welcome to the car world!\" << endl;\n}\n\nint Car::get_wheels(){\n    return this->m_nWheels;\n}\n\nvoid Car::set_wheels(int x){\n    this->m_nWheels = x;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-3 对象数组初始化",
+      "score": "10",
+      "author": "范鹏程",
+      "organization": "内蒙古师范大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>根据类定义，进行对象数组的定义，按照输出样例输出相应的数据。</p>\n<h3 id=\"类定义：\">类定义：</h3>\n<pre><code>#include&lt;iostream&gt;\nusing namespace std;\nclass A{\n int data;\npublic:\n A(int k=0){\n data=k;\n }\n void show(){\n cout&lt;&lt;\"data=\"&lt;&lt;data&lt;&lt;endl;\n }\n};</code></pre>\n<p>###编写main函数，定义三个对象数组，完成指定的输出</p>\n<pre><code>/* 请在这里填写答案 */</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>无</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>data=0\ndata=0\ndata=0\n\ndata=1\ndata=0\ndata=0\n\ndata=1\ndata=2\ndata=3\n</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\nusing namespace std;\n\nint main(){\n    A a[3]={A(0), A(0), A(0)},\n    b[3]={A(1), A(0), A(0)},\n    c[3]={A(1), A(2), A(3)};\n    for (int i=0;i<3;i++){\n        a[i].show();\n    }\n    cout << endl;\n    for (int i=0;i<3;i++){\n        b[i].show();\n    }\n    cout << endl;\n    for (int i=0;i<3;i++){\n        c[i].show();\n    }\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>已知类 A 是类 B 的友元，类 B 是类 C 的友元，下列说法正确的是？</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类A的成员函数能访问类C的私有成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 一定是类 A 的友元</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>C 的成员函数可以访问类 B 的对象的任何成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>A 的成员函数可以访问类 B 的对象的任何成员</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>关于友元函数的描述中，错误的是?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数不是成员函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数只可访问类的私有成员</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数的调用方法同一般函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数可以是另一类中的成员函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以下关于 this指针的说法中不正确是？</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>const成员函数内部不可以使用this指针</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>成员函数内的this指针，指向成员函数所作用的对象</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在构造函数内部可以使用this指针</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在析构函数内部可以使用this指针</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W5": [
+    {
+      "title": "6-1 可变大小矩阵",
+      "score": "10",
+      "author": "杨军",
+      "organization": "四川师范大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>完成一个矩阵类，可以存放二维数据，在构造函数中通过参数指定行数和列数，具有矩阵转置的功能和显示数据的功能。要求实现该矩阵类，使得主函数中的测试代码可以正确运行并得到正确的结果。</p>\n<h3 id=\"函数接口定义：\">函数接口定义：</h3>\n<p>实现矩阵类</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>\n/* 请在这里填写答案 */\nint main(){\n int r,c;\n cin&gt;&gt;r&gt;&gt;c; \n Matrix m(r,c); // 初始大小 2行3列 \n m.input();\n cout&lt;&lt;\"datas before:\"&lt;&lt;endl;\n m.show();\n m.transform();\n cout&lt;&lt;\"datas after:\"&lt;&lt;endl;\n m.show();\n}\n</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<p>首先输入两个整数代表行数和列数，然后输入矩阵元素。</p>\n<pre><code>3 2\n1 2\n3 4\n5 6</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<p>分别输出转置之前和之后的矩阵数据。例如：</p>\n<pre><code>datas before:\n 1 2\n 3 4\n 5 6\ndatas after:\n 1 3 5\n 2 4 6\n</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\n#include <iomanip>\n#include <cstdlib>\nusing namespace std;\nenum class VIEW{ ROW, COL };\n\nclass Matrix{\npublic:\n    int row = 0;\n    int col = 0;\n    VIEW view = VIEW::ROW;\n    int* mat = NULL;\n    Matrix( int r, int c );\n    ~Matrix( );\n    void input( );\n    void show( );\n    void transform( );\n};\n\nMatrix::Matrix( int r, int c ){\n    this -> row = r;\n    this -> col = c;\n    this -> mat = new int[ r * c ];\n    this -> view = VIEW::ROW;\n}\n\nMatrix::~Matrix( ){\n    delete [ ] mat;\n}\n\nvoid Matrix::input( ){\n    for( int i = 0; i < row * col; i++ )\n        std::cin >> this -> mat[ i ];\n}\n\nvoid Matrix::show( ){",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "author": "何振峰",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以下程序中，new语句干了什么。</p>\n<p>int** num;</p>\n<p>num = new int* [20];</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>分配了长度为20的整数数组空间，并将首元素的指针返回。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>分配了一个整数变量的空间，并将其初始化为20。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>分配了长度为20的整数指针数组空间，并将num[0]的指针返回。</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>存在错误，编译不能通过。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>表达式 “new int”的返回值类型是?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int *</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int &amp;</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>无法确定</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设void f1(int * m，long &amp; n)；int a；long b；则以下调用合法的是（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>f1(a，b)；</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>f1(&amp;a，b)；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>f1(a，&amp;b)；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>f1(&amp;a，&amp;b)；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        }
+      ],
+      "result": "答案错误",
+      "q_type": "single"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下列关于引用的说法，错误的是____。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>引用在定义时必须初始化</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>引用在初始化时不能绑定常量值</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>引用初始化后，可以通过更变来引用其他变量</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>数组不能定义引用</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下面程序段 int a=1,b=2; int &amp;r=a; r=b; r=7; cout&lt;&lt;a&lt;&lt;endl; 的输出结果是?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>2</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>7</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>无法确定</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以下说法正确的是（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在静态成员函数中可以调用同类的其他任何成员函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>const成员函数不能作用于非const对象</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在静态成员函数中不能使用this指针</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>静态成员变量每个对象有各自的一份</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W6": [
+    {
+      "author": "董俊",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>一个类的友元函数是这个类的成员。  </p>\n</div>",
+      "options": [
+        {
+          "text": "T",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "F",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "check"
+    },
+    {
+      "author": "张德慧",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在C++语言中引入内联函数（inline function）的主要目的是降低空间复杂度，即缩短目标代码长度。  </p>\n</div>",
+      "options": [
+        {
+          "text": "T",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "F",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "check"
+    },
+    {
+      "author": "李志明",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>主程序调用内联函数（inline）时，不发生控制转移，无需保存和恢复环境变量等，因此，节省了系统开销。内联函数的声明以及最终的生效，是由程序员决定的。  </p>\n</div>",
+      "options": [
+        {
+          "text": "T",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "F",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "check"
+    },
+    {
+      "title": "6-1 复数的加减运算",
+      "score": "10",
+      "author": "fpc",
+      "organization": "内蒙古师范大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>###复数加减（友元的应用）</p>\n<ol>\n<li>声明一个复数类CComplex（类私有数据成员为double型的real和image）</li>\n<li>定义构造函数，用于指定复数的实部与虚部。</li>\n<li>定义成员函数，调用该函数时，以格式real+image i的格式输出当前对象（当虚部为正数时，实部虚部中间用+号连接，当虚部为复数时，实部虚部用-号连接）。</li>\n<li>编写加法友元函数，以复数对象c1, c2为参数，求两个复数对象之和（实部虚部分别相加）。</li>\n<li>编写减法友元函数，以复数对象c1, c2为参数，求两个复数对象的差（实部虚部分别相减）</li>\n</ol>\n<p>输入格式:<br/>输入有两行：<br/>第一行是复数c1的实部与虚部，以空格分隔；<br/>第二行是复数c2的实部与虚部，以空格分隔。</p>\n<p>输出格式:<br/>输出共四行:<br/>第一行是c1；<br/>第二行是c2；<br/>第三行是c1与c2之和；<br/>第四行是c1与c2之差；</p>\n<h4 id=\"函数接口定义：\">函数接口定义：</h4>\n<pre><code>在这里描述类定义\nclass CComplex{...}</code></pre>\n<h4 id=\"裁判测试程序样例：\">裁判测试程序样例：</h4>\n<pre><code>int main()\n{\n double r1,r2,i1,i2;\n cin&gt;&gt;r1&gt;&gt;i1;\n cin&gt;&gt;r2&gt;&gt;i2;\n CComplex c1(r1,i1),c2(r2,i2),c3,c4;\n c1.display();\n c2.display();\n c3=add(c1,c2);\n c3.display();\n c4=    sub(c1,c2);\n c4.display();\n}\n\n/* 请在这里填写答案 */</code></pre>\n<p>####输入样例：</p>\n<pre><code>10 20\n30 40</code></pre>\n<h4 id=\"输出样例：\">输出样例：</h4>\n<pre><code>10+20i\n30+40i\n40+60i\n-20-20i</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "class CComplex{\n    private:\n    double real, image;\n    public:\n    CComplex (double a, double b){\n        real = a, image = b;\n    }\n    CComplex (){\n        real=0,image=0;\n    }\n    void display(){\n        cout << this->real << (((this->image) >= 0) ? \"+\" : \"\") << this->image << \"i\" << endl;\n    }\n    friend CComplex add(CComplex a, CComplex b);\n    friend CComplex sub(CComplex a, CComplex b);\n};\n\nCComplex add(CComplex a, CComplex b){\n    return CComplex(a.real + b.real, a.image + b.image);\n}\nCComplex sub(CComplex a, CComplex b){\n    return CComplex(a.real - b.real, a.image - b.image);\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-2 函数重载实现两数相加",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设计一个重载函数add，该函数有两个参数，可以实现两个类型相同的参数相加的操作，函数返回相加的结果。两个参数可以是整数、实数和字符串，但必须保证两个参数类型相同。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;iomanip&gt;\nusing namespace std;\n\n/* 请在这里填写答案 */\n\n\nint main()\n{\n int a, b;\n double c, d;\n string s1, s2;\n\n cin &gt;&gt; a &gt;&gt; b;\n cin &gt;&gt; c &gt;&gt; d;\n cin &gt;&gt; s1 &gt;&gt; s2;\n\n cout &lt;&lt; add(a, b) &lt;&lt; endl;\n cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; add(c, d) &lt;&lt; endl;\n cout &lt;&lt; add(s1, s2) &lt;&lt; endl;\n\n return 0;\n}</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>3 5\n3.3333 5.555555\nhello world</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>8\n8.89\nhelloworld</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "int add(int a, int b){\n    return a + b;\n}\n\ndouble add(double a, double b){\n    return a + b;\n}\n\nstring add(string a, string b){\n    return a + b;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "6-3 带默认形参值的函数",
+      "score": "10",
+      "author": "李廷元",
+      "organization": "中国民用航空飞行学院",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设计一个带默认形参值的函数add，该函数有三个参数，可以实现三个整数类型的参数相加的操作，函数返回相加的结果。默认形参值从右至左分别是30、20。</p>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>#include &lt;iostream&gt;\nusing namespace std;\n\n/* 请在这里填写答案 */\n\n\nint main()\n{\n int a, b, c;\n\n cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;\n\n cout &lt;&lt; add(a) &lt;&lt; endl;\n cout &lt;&lt; add(a, b) &lt;&lt; endl;\n cout &lt;&lt; add(a, b, c) &lt;&lt; endl;\n\n return 0;\n}</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<pre><code>1 2 3</code></pre>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<pre><code>51\n33\n6</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "\nint add(int a, int b, int c){\n    return a + b + c;\n}\n\nint add(int a){\n    return add(a, 20, 30);\n}\n\nint add(int a, int b){\n    return add(a, b, 30);\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "title": "7-1 统计英文单词个数",
+      "score": "10",
+      "author": "吴云鹏",
+      "organization": "郑州大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>给出一篇英文文章，现在需要统计文章中出现英文单词的数量。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>第一行一个T，代表数据组数</p>\n<p>对于每组数据，第一行一个n，代表文章中单词的个数，其后n行每行一个只包含小写字母的长度为1到10的字符串</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>每组数据输出若干行，每行输出单词以及它出现的次数（中间空格隔开），不同单词按单词字典序从小到大输出</p>\n<p>保证单词出现的总次数&lt;=1e5</p>\n<h3 id=\"输入样例\">输入样例:</h3>\n<pre><code>1\n8\nit\nis\na\npen\nit\nis\na\ndog</code></pre>\n<h3 id=\"输出样例\">输出样例:</h3>\n<pre><code>a 2\ndog 1\nis 2\nit 2\npen 1</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <map>\n#include <string>\n#include <iostream>\nusing namespace std;\n\nint main(){\n    int T;\n    cin >> T;\n    while (T--){\n        int n;\n        cin >> n;\n        map <string, int> m;\n        for (int i = 0; i < n; i++) {\n            string w;\n            cin >> w;\n            m[w]++;\n        }\n\n        for (auto a : m) {\n            cout << a.first << \" \" << a.second << endl;\n        }\n    }\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "1000 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "title": "7-2 众数",
+      "score": "10",
+      "author": "小黑",
+      "organization": "临沂大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>给出若干个正整数，请找出出现次数最多的数。</p>\n<h3 id=\"输入格式\">输入格式:</h3>\n<p>在一行中输入若干个数，以空格间隔（读入数的总个数不超过5000）。</p>\n<h3 id=\"输出格式\">输出格式:</h3>\n<p>输出出现次数最多的数（若答案不唯一，输出最小的那个）。</p>\n<h3 id=\"输入样例\">输入样例:</h3>\n<p>在这里给出一组输入。例如：</p>\n<pre><code>18 999 999 2100000000</code></pre>\n<h3 id=\"输出样例\">输出样例:</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>999</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    map<int, int> m;\n    int c;\n    while (cin >> c) {\n        m[c]++;\n    }\n    int n = 0;\n    int ans = 0;\n    for (auto a : m) {\n        if (a.second > n) {\n            n = a.second;\n            ans = a.first;\n        }\n    }\n    cout << ans << endl;\n    return 0;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB",
+        "栈限制": "8192 KB"
+      },
+      "q_type": "program"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>（2020final）一个函数功能不太复杂，但要求被频繁调用，可选用（    ）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>内联函数</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>重载函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>递归函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>嵌套函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在（    ）情况下适宜采用inline定义内联函数。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数体含有循环语句</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数体含有递归语句</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数代码少、频繁调用</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>函数代码多、不常调用</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下面说法正确的是（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>内联函数在运行时是将该函数的目标代码插入每个调用该函数的地方</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>内联函数在编译时是将该函数的目标代码插入每个调用该函数的地方</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类的内联函数必须在类体内定义</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类的内联函数必须在类体外通过加关键字inline定义</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "wangxiu",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果默认参数的函数声明为“ void fun(int a,int b=1,char c='a',float d=3.2);”，<br/>则下面调用写法正确的是（ ）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>fun();</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>fun(2,3);</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>fun(2, ,'c',3.14)</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>fun(int a=1);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "王秀",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在C++中，关于下列设置缺省参数值的描述中，（）是正确的。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>不允许设置缺省参数值；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在指定了缺省值的参数右边，不能出现没有指定缺省值的参数；</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>只能在函数的定义性声明中指定参数的缺省值；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>设置缺省参数值时，必须全部都设置；</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "高巍然",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>决定C++语言中函数的返回值类型的是（）</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>return语句中的表达式类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>调用该函数时系统随机产生的类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>调用该函数时的主调用函数类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在定义该函数时所指定的数据类型</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "李廷元",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如有函数定义：void func(int x = 0, int y = 0){ …. }，则下列函数调用中会出现问题的是____。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>func(1,2, 3);</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>func(1,2);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>func(1);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>func();</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "GONG",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以下选项中，是正确的函数默认形参设置的是。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int fun(int a,int b,int c);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int fun(int a,int b,int c=1);</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int fun(int a,int b=1,int c);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>int fun(int a=1,int b,int c);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "何振峰",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>对于以下关于友元的说法</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果函数fun被声明为类A的友元函数，则该函数成为A的成员函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果函数fun被声明为类A的友元函数，则该函数能访问A的保护成员，但不能访问私有成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果函数fun被声明为类A的友元函数，则fun的形参类型不能是A。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以上答案都不对</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "何振峰",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>对于类之间的友元关系：</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果类A是类B的友元，则B的成员函数可以访问A的私有成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果类A是类B的友元，则B也是A的友元。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>如果类A是类B的友元，并且类B是类C的友元，则类A也是类C的友元。</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>以上答案都不对。</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "何振峰",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元的作用是</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>提高程序的运用效率</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>加强类的封装性</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>实现数据的隐藏性</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>增加成员函数的种类</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "张德慧",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>下面关于友元的描述中，错误的是：</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数可以访问该类的私有数据成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>一个类的友元类中的成员函数都是这个类的友元函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元可以提高程序的运行效率</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类与类之间的友元关系可以继承</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "张德慧",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>已知类A是类B的友元，类B是类C的友元，则：</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类A一定是类C的友元</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类C一定是类A的友元</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类C的成员函数可以访问类B的对象的任何成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类A的成员函数可以访问类B的对象的任何成员</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "范鹏程",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>不属于类的成员函数的是（ ） 。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>构造函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>析构函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>友元函数</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>复制构造函数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "范鹏程",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>若类A被说明成类B的友元，则（ ） 。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类A的成员即类B的成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类B的成员即类A的成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类A的成员函数不能访问类B的成员</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>类B不一定是类A的友元</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "余春艳",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在下列关键字中,用以说明类中公有成员的是（ ）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>public</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>private</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>protected</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>friend</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "翁恺",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Suppose a class is defined without any keywords such as public, private and protected，all members default to</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>public</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>protected</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>private</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>static</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "翁恺",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Who can access a private member of a class?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Only member functions of that class.</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Only member functions of that class and friend functions or member functions of friend classes</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Only member functions of that class and derived classes</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>None of the others</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "张德慧",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>静态成员函数没有：</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>返回值</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>this指针</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>指针参数</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>返回类型</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    },
+    {
+      "author": "翁恺",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>For the code below:</p>\n<pre><code>class A {\n  static int i;\n  //...\n};</code></pre>\n<p>Which statement is NOT true?</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>All objects of class A reserve a space for i</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": true
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>All objects of class A share the space of i</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>i is a member variable of class A</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>i is allocated in global data space</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": false
+        }
+      ],
+      "result": "答案正确",
+      "q_type": "single"
+    }
+  ],
+  "W7": [
+    {
+      "author": "向训文",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>在构造函数中，使用初始化列表对数据成员进行初始化：</p>\n<p>样例程序：</p>\n<pre><code>#include&lt;iostream&gt; \nusing namespace std;\nclass Point {\npublic:\n    // 构造函数，使用初始化列表对数据成员进行初始化\n    Point(int x, int y)10 分 {}\n    int getX() { return m_x; }\n    int getY() { return m_y; }\nprivate:\n    int m_x, m_y;\n};\nint main() {\n    int x, y;\n    cin &gt;&gt; x &gt;&gt; y; // 输入点的x，y坐标\n    Point p(x, y); // 创建点对象\n    cout &lt;&lt; p.getX() &lt;&lt; \" \" &lt;&lt; p.getY() &lt;&lt; endl; // 输出点的坐标\n    return 0;\n}</code></pre>\n<p><span style=\"font-size: 0.6em;\">题目来自\"新手学cpp\"项目: <a href=\"https://learncpp.top/\" target=\"_blank\">https://learncpp.top/</a>（内含完整题目集、课件、讲解视频）</span></p>\n</div>",
+      "options": [],
+      "q_type": "blank"
+    },
+    {
+      "title": "6-1 最大值函数重载",
+      "score": "10",
+      "author": "杨军",
+      "organization": "四川师范大学",
+      "description": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>编写重载函数myMax可分别求取两个整数，三个整数，两个双精度数的最大值。</p>\n<h3 id=\"函数接口定义：\">函数接口定义：</h3>\n<pre><code></code></pre>\n<h3 id=\"裁判测试程序样例：\">裁判测试程序样例：</h3>\n<pre><code>\n/* 请在这里填写答案 */\n\nint main(){\n cout&lt;&lt;myMax(3,4)&lt;&lt;endl;\n cout&lt;&lt;myMax(3,4,5)&lt;&lt;endl;\n cout&lt;&lt;myMax(4.3,3.4)&lt;&lt;endl;\n}\n</code></pre>\n<h3 id=\"输入样例：\">输入样例：</h3>\n<p>无</p>\n<h3 id=\"输出样例：\">输出样例：</h3>\n<p>在这里给出相应的输出。例如：</p>\n<pre><code>4\n5\n4.3\n</code></pre>\n</div>",
+      "input_example": null,
+      "output_example": null,
+      "submitted_code": "#include <iostream>\nusing namespace std;\n\nint myMax(int a, int b) {\n    return (a > b) ? a : b;\n}\n\nint myMax(int a, int b, int c) {\n    return myMax(myMax(a, b), c); \n}\n\ndouble myMax(double a, double b) {\n    return (a > b) ? a : b;\n}",
+      "limits": {
+        "代码长度限制": "16 KB",
+        "时间限制": "400 ms",
+        "内存限制": "64 MB"
+      },
+      "q_type": "function"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>有如下类的定义：</p>\n<pre><code>class Sample\n{\npublic:\n    Sample( );\n    Sample(int x );\n    ......\n};</code></pre>\n<p>动态申请对象存储单元，调用一个带参构造函数，初值为2的语句是（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample(2);</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample a=new Sample(2);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample[2];</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample a=new Sample[2];</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        }
+      ],
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>有如下定义：</p>\n<pre><code>class Sample\n{\npublic:\n    Sample( );\n    Sample(int x );\n    ......\n};</code></pre>\n<p>如果用new创建对象数组，该数组中包含10个对象，则正确的语句为（）。</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample[10];</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample(10);</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample[ ];</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>Sample *a=new Sample;</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        }
+      ],
+      "q_type": "single"
+    },
+    {
+      "author": "范鹏程",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>若类A的构造函数定义为<br/>A(int aa=1, int bb=0) { a = aa; b = bb; }<br/>则执行：A x(4);后，x.a和x.b的值分别是（ ）</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1,0</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1,4</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>4,0</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>4,1</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        }
+      ],
+      "q_type": "single"
+    },
+    {
+      "author": "黄淑伟",
+      "stem": "<div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>假设A是一个类的名字，下面程序片段，类A会调用析构函数几次？<br/>int main(){<br/>A <code>* p = new A[2];</code><br/>A <code>* p2 = new A;</code><br/>A a;<br/>delete [] p;<br/>}</p>\n</div>",
+      "options": [
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>A.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>1</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>B.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>2</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>C.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>3</p>\n</div></div></div></div>",
+          "is_user_choice": false,
+          "is_correct": null
+        },
+        {
+          "text": "<div class=\"flex gap-2 items-start min-w-0 grow\"><span>D.</span><div class=\"min-w-0 break-normal shrink grow\"><div class=\"hyphens-auto flex-1 min-w-0 break-words\" lang=\"en\"><div class=\"rendered-markdown dark:rendered-markdown-invert\"><p>4</p>\n</div></div></div></div>",
+          "is_user_choice": true,
+          "is_correct": false
+        }
+      ],
+      "q_type": "single"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<div class="rendered-markdown dark:rendered-markdown-invert">
+ <p>
+  For the code below:
+ </p>
+ <div data-code="">
+  <div class="codeEditor_CHvdZ readOnly_GnZrN" style="font-size: 0.875rem;">
+   <div class="cm-editor ͼ1 ͼ2 ͼo">
+    <div class="cm-panels cm-panels-top" style="top: 0px;">
+     <div class="cm-panel">
+      <div class="flex space-x-3 px-3 py-2 empty:hidden text-lightest toolbar_SkQeK bd-bottom-1">
+       <button class="pc-button action_ZO2qN pc-button-text pc-xs pc-color-inherit pc-active-primary cursor-pointer" tabindex="0" type="button">
+        <div class="pc-text pc-color-inherit pc-active-primary whitespace-nowrap pc-trs-normal pc-gap-4 shrink no-grow">
+         <div class="pc-text-raw text-xs ellipsis" style="text-align: center;">
+          复制内容
+         </div>
+        </div>
+       </button>
+       <button class="pc-button action_ZO2qN pc-button-text pc-xs pc-color-inherit pc-active-primary cursor-pointer" tabindex="0" type="button">
+        <div class="pc-text pc-color-inherit pc-active-primary whitespace-nowrap pc-trs-normal pc-gap-4 shrink no-grow">
+         <div class="pc-text-raw text-xs ellipsis" style="text-align: center;">
+          格式
+         </div>
+        </div>
+       </button>
+       <button class="pc-button action_ZO2qN pc-button-text pc-xs pc-color-inherit pc-active-primary cursor-pointer" tabindex="0" type="button">
+        <div class="pc-text pc-color-inherit pc-active-primary whitespace-nowrap pc-trs-normal pc-gap-4 shrink no-grow">
+         <div class="pc-text-raw text-xs ellipsis" style="text-align: center;">
+          全屏
+         </div>
+        </div>
+       </button>
+       <span class="select-none bd-left-1 my-1">
+       </span>
+       <button class="pc-button action_ZO2qN pc-button-text pc-xs pc-color-inherit pc-active-primary cursor-pointer" tabindex="0" type="button">
+        <div class="pc-text pc-color-inherit pc-active-primary whitespace-nowrap pc-trs-normal pc-gap-4 shrink no-grow">
+         <div class="pc-text-raw text-xs ellipsis" style="text-align: center;">
+          收起
+         </div>
+        </div>
+       </button>
+      </div>
+     </div>
+    </div>
+    <div aria-live="polite" class="cm-announced">
+    </div>
+    <div class="cm-scroller" tabindex="-1">
+     <div aria-hidden="true" class="cm-gutters cm-gutters-before" style="min-height: 56px; position: sticky;">
+      <div class="cm-gutter cm-lineNumbers">
+       <div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">
+        9
+       </div>
+       <div class="cm-gutterElement cm-activeLineGutter" style="height: 14px; margin-top: 8px;">
+        1
+       </div>
+       <div class="cm-gutterElement" style="height: 14px;">
+        2
+       </div>
+       <div class="cm-gutterElement" style="height: 14px;">
+        3
+       </div>
+       <div class="cm-gutterElement" style="height: 14px;">
+        4
+       </div>
+      </div>
+      <div class="cm-gutter cm-foldGutter">
+       <div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">
+        <span title="Unfold line">
+         ▸
+        </span>
+       </div>
+       <div class="cm-gutterElement cm-activeLineGutter" style="height: 14px; margin-top: 8px;">
+       </div>
+      </div>
+     </div>
+     <div aria-autocomplete="list" aria-multiline="true" aria-placeholder="" aria-readonly="true" autocapitalize="off" autocorrect="off" class="cm-content" contenteditable="false" role="textbox" spellcheck="false" style="tab-size: 4;" translate="no" writingsuggestions="false">
+      <div class="cm-line cm-activeLine">
+       class A {
+      </div>
+      <div class="cm-line">
+       static int i;
+      </div>
+      <div class="cm-line">
+       //...
+      </div>
+      <div class="cm-line">
+       };
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <p>
+  Which statement is NOT true?
+ </p>
+</div>

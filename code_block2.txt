@@ -1,0 +1,7 @@
+<div class="rendered-markdown dark:rendered-markdown-invert"><p>For the code below:</p>
+<pre><code>class A {
+  static int i;
+  //...
+};</code></pre>
+<p>Which statement is NOT true?</p>
+</div>
