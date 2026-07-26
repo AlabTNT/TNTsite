@@ -1,2 +1,0 @@
-# TNTnotebook
-Welcome to TNTnotebook.

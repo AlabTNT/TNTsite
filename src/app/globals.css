@@ -20,7 +20,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #151515;
     --foreground: #ededed;
   }
 }
@@ -29,4 +29,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Fredoka', Arial, Helvetica, sans-serif;
+}
+
+/* Ensure Typst SVG fills the container responsively */
+.typst-render-container svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* On dark mode, we might want to invert colors of the SVG if it uses white background */
+@media (prefers-color-scheme: dark) {
+  .typst-render-container svg {
+    filter: invert(0.9) hue-rotate(180deg);
+  }
 }

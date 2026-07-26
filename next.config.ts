@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "standalone",
+  serverExternalPackages: ["@myriaddreamin/typst-ts-node-compiler"]
 };
 
 export default nextConfig;

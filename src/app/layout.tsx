@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`antialiased bg-[#0a0a0a] text-zinc-100 min-h-screen flex flex-col`}
+        className={`antialiased bg-[#151515] text-zinc-100 min-h-screen flex flex-col`}
         style={{ fontFamily: "'Fredoka', sans-serif" }}
       >
         <Nav />

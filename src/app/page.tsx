@@ -41,11 +41,20 @@ export default function Home() {
             </svg>
           </Link>
 
+          <Link href="/yilulou" className="relative group flex items-center justify-center">
+            <div className="absolute -top-10 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-sky-400/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-sky-400/90 whitespace-nowrap">
+              一路楼
+            </div>
+            <Book className="w-8 h-8 text-zinc-400 group-hover:text-sky-400 group-hover:scale-110 transition-all duration-300" strokeWidth={2} />
+          </Link>
+
           <Link href="/notes" className="relative group flex items-center justify-center">
             <div className="absolute -top-10 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-sky-400/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-sky-400/90 whitespace-nowrap">
               Notebook
             </div>
-            <Book className="w-8 h-8 text-zinc-400 group-hover:text-sky-400 group-hover:scale-110 transition-all duration-300" strokeWidth={2} />
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400 group-hover:text-sky-400 group-hover:scale-110 transition-all duration-300">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
           </Link>
 
           <Link href="/tutorial" className="relative group flex items-center justify-center">

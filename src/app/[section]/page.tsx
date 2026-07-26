@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getAllPosts } from "@/lib/markdown";
+import { getAllPosts } from "@/lib/content";
 import Link from "next/link";
 import { Book, FileText } from "lucide-react";
 
