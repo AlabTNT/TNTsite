@@ -31,47 +31,23 @@ const TYPE_MESSAGES: Record<string, string> = {
 };
 
 function SpyDecoration({ type }: { type: string }) {
-  const paths: Record<string, { path: string; viewBox: string }> = {
-    flight: {
-      viewBox: "0 0 64 64",
-      path: "M32 8L16 48h12l4-14 4 14h12L32 8zm-8 40l4 10h4l4-10H24zm8-36v10",
-    },
-    train: {
-      viewBox: "0 0 80 64",
-      path: "M8 32V12h64v20H8zm0 4h64v4H8v-4zM16 4h48l12 8H4l12-8zm8 32v8h4v-8m20 0v8h4v-8M20 44a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm40 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
-    },
-    exam: {
-      viewBox: "0 0 64 64",
-      path: "M8 8h48v40H8V8zm8 8h12m-12 8h32m-12 8h12M16 32v16m16-16v16M8 48l8 8 12-12m28 8L44 40",
-    },
-    sleep: {
-      viewBox: "0 0 80 80",
-      path: "M40 8a32 32 0 1 0 32 32c0-15-10.5-27.5-24.5-31v12.5a19 19 0 0 1 0 37c-7.5 0-14-4.5-17-13A32 32 0 0 0 40 8zm-4 20l-2 4-4 2 4 2 2 4 2-4 4-2-4-2-2-4z",
-    },
-    daily: {
-      viewBox: "0 0 64 64",
-      path: "M8 12h48v44H8V12zm4 8v4h40v-4H12zm0 8v4h40v-4H12zm0 8v4h28v-4H12zm28-20v-8m-8 8V4m-8 8V8m24 0v4",
-    },
-    trigger_event: {
-      viewBox: "0 0 64 64",
-      path: "M32 8L20 44h8l4-14 4 14h8L32 8zM20 48v8h24v-8H20zm4-16h16",
-    },
-    lasting_event: {
-      viewBox: "0 0 64 64",
-      path: "M16 8v48M32 12v40M48 8v48M12 20h8m-8 12h8m-8 12h8m36-24h8m-8 12h8m-8 12h8M32 8v-4m0 56v-4",
-    },
-    default: {
-      viewBox: "0 0 64 64",
-      path: "M32 4v56M4 32h56M20 20l24 24m0-24L20 44",
-    },
+  const paths: Record<string, string> = {
+    flight: "M22 2L11.5 16H3l4 3-4 3h8.5L22 22l2-10-2-10zm-4 10l2 4-2 4-2-4 2-4z",
+    train: "M4 11V6h16v5H4zm0 2h16v2H4v-2zM6 3h12c1.1 0 2 .9 2 2v1H4V5c0-1.1 .9-2 2-2zM5 18v2h3v-2h8v2h3v-2M7 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z",
+    exam: "M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h16V5H4zm4 3h4M8 11h8M8 15h6",
+    sleep: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
+    daily: "M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM7 13h3M7 16h3",
+    trigger_event: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+    lasting_event: "M8 2v20M16 2v20M3 8h4M17 8h4M3 14h4M17 14h4M3 20h4M17 20h4",
+    default: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
   };
 
-  const { path: d, viewBox } = paths[type] || paths.default;
+  const d = paths[type] || paths.default;
 
   return (
-    <div className="absolute right-12 bottom-12 w-[42px] h-[42px] md:w-[54px] md:h-[54px] pointer-events-none select-none z-0">
-      <svg width="100%" height="100%" viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d={d} stroke="#a1a1aa" strokeWidth="1.5" fill="none" opacity="0.35" />
+    <div className="absolute right-[3.5rem] bottom-[3rem] w-[63px] h-[63px] md:w-[81px] md:h-[81px] pointer-events-none select-none z-0">
+      <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="1.2" opacity="0.35" xmlns="http://www.w3.org/2000/svg">
+        <path d={d} />
       </svg>
     </div>
   );
