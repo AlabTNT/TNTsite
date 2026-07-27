@@ -60,7 +60,19 @@ export default function SpyAdminPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     try {
-      const payload: Record<string, unknown> = { title: form.title, description: form.description || null, location: form.location || null, timestamp: form.timestamp, type: form.type };
+      let title = form.title;
+      let location: string | null = form.location;
+
+      if (form.type === "flight") {
+        title = form.flightNumber || "Flight";
+        location = form.departure && form.arrival ? `${form.departure}-${form.arrival}` : null;
+      }
+      if (form.type === "train") {
+        title = form.trainNumber || "Train";
+        location = form.departure && form.arrival ? `${form.departure}-${form.arrival}` : null;
+      }
+
+      const payload: Record<string, unknown> = { title, description: form.description || null, location, timestamp: form.timestamp, type: form.type };
 
       if (["lasting_event", "flight", "train", "exam"].includes(form.type)) {
         payload.timestamp2 = form.timestamp2 || null;
@@ -165,10 +177,25 @@ export default function SpyAdminPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input type="text" placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required
-              className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-[#C23D1A]/50 transition-colors" />
-            <input type="text" placeholder="Location" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })}
-              className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-[#C23D1A]/50 transition-colors" />
+            {isTransport ? (
+              <>
+                <div className="px-4 py-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-zinc-500 text-sm flex items-center gap-2">
+                  <span className="text-zinc-600 text-xs">Title:</span>
+                  <span className="text-zinc-300 font-mono">{form.type === "flight" ? (form.flightNumber || "—") : (form.trainNumber || "—")}</span>
+                </div>
+                <div className="px-4 py-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-zinc-500 text-sm flex items-center gap-2">
+                  <span className="text-zinc-600 text-xs">Location:</span>
+                  <span className="text-zinc-300 font-mono">{form.departure && form.arrival ? `${form.departure}-${form.arrival}` : "—"}</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <input type="text" placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required
+                  className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-[#C23D1A]/50 transition-colors" />
+                <input type="text" placeholder="Location" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })}
+                  className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-[#C23D1A]/50 transition-colors" />
+              </>
+            )}
             <input type="text" placeholder="Timestamp (e.g. 2026-07-27)" value={form.timestamp} onChange={e => setForm({ ...form, timestamp: e.target.value })} required
               className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-[#C23D1A]/50 transition-colors font-mono" />
             {needsTimestamp2 && (
