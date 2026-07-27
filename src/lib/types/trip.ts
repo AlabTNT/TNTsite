@@ -79,8 +79,25 @@ export function computeStatus(activity: SpyActivity): 'past' | 'active' | 'upcom
 function parseTimestamp(ts: string): Date {
   const d = new Date(ts);
   if (!isNaN(d.getTime())) return d;
+
+  // Handle "MM-DD/HH:MM-HH:MM" format (e.g. "07-30/03:00-07:15")
+  const rangeMatch = ts.match(/^(\d{2})-(\d{2})\/(\d{2}):(\d{2})-(\d{2}):(\d{2})$/);
+  if (rangeMatch) {
+    const year = new Date().getFullYear();
+    return new Date(year, parseInt(rangeMatch[1]) - 1, parseInt(rangeMatch[2]), parseInt(rangeMatch[3]), parseInt(rangeMatch[4]));
+  }
+
+  // Handle "MM-DD/HH:MM" format  
+  const simpleMatch = ts.match(/^(\d{2})-(\d{2})\/(\d{2}):(\d{2})$/);
+  if (simpleMatch) {
+    const year = new Date().getFullYear();
+    return new Date(year, parseInt(simpleMatch[1]) - 1, parseInt(simpleMatch[2]), parseInt(simpleMatch[3]), parseInt(simpleMatch[4]));
+  }
+
+  // Handle "YYYY-MM-DD" format
   const isoMatch = ts.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (isoMatch) return new Date(ts + 'T00:00:00');
+
   return new Date();
 }
 
