@@ -69,7 +69,7 @@ function SpyDecoration({ type }: { type: string }) {
   const { path: d, viewBox } = paths[type] || paths.default;
 
   return (
-    <div className="absolute -right-4 -bottom-4 w-48 h-48 md:w-64 md:h-64 pointer-events-none select-none z-0">
+    <div className="absolute right-0 bottom-0 w-48 h-48 md:w-64 md:h-64 pointer-events-none select-none z-0">
       <svg
         width="100%"
         height="100%"
@@ -79,8 +79,8 @@ function SpyDecoration({ type }: { type: string }) {
       >
         <defs>
           <radialGradient id={`s-g-${type}`} cx="85%" cy="85%" r="70%">
-            <stop offset="0%" stopColor="white" stopOpacity="0.07" />
-            <stop offset="40%" stopColor="white" stopOpacity="0.03" />
+            <stop offset="0%" stopColor="white" stopOpacity="0.12" />
+            <stop offset="40%" stopColor="white" stopOpacity="0.05" />
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <mask id={`s-m-${type}`}>
@@ -90,8 +90,8 @@ function SpyDecoration({ type }: { type: string }) {
         <path
           d={d}
           stroke="white"
-          strokeWidth="0.8"
-          strokeOpacity="0.12"
+          strokeWidth="1"
+          strokeOpacity="0.15"
           fill="none"
           mask={`url(#s-m-${type})`}
         />
