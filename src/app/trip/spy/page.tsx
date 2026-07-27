@@ -34,7 +34,7 @@ function SpyDecoration({ type }: { type: string }) {
   const paths: Record<string, { path: string; viewBox: string }> = {
     flight: {
       viewBox: "0 0 64 64",
-      path: "M32 4L16 48h12l4-16 4 16h12L32 4zm-8 44l4 12h4l4-12H24zm8-40v12",
+      path: "M32 8L16 48h12l4-14 4 14h12L32 8zm-8 40l4 10h4l4-10H24zm8-36v10",
     },
     train: {
       viewBox: "0 0 80 64",
@@ -54,7 +54,7 @@ function SpyDecoration({ type }: { type: string }) {
     },
     trigger_event: {
       viewBox: "0 0 64 64",
-      path: "M32 8L20 44h8l4-16 4 16h8L32 8zM20 48v8h24v-8H20zm4-16h16",
+      path: "M32 8L20 44h8l4-14 4 14h8L32 8zM20 48v8h24v-8H20zm4-16h16",
     },
     lasting_event: {
       viewBox: "0 0 64 64",
@@ -69,32 +69,17 @@ function SpyDecoration({ type }: { type: string }) {
   const { path: d, viewBox } = paths[type] || paths.default;
 
   return (
-    <div className="absolute right-0 bottom-0 w-48 h-48 md:w-64 md:h-64 pointer-events-none select-none z-0">
-      <svg
-        width="100%"
-        height="100%"
-        viewBox={viewBox}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div className="absolute right-6 bottom-6 w-28 h-28 md:w-36 md:h-36 pointer-events-none select-none z-0">
+      <svg width="100%" height="100%" viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id={`s-g-${type}`} cx="85%" cy="85%" r="70%">
-            <stop offset="0%" stopColor="white" stopOpacity="0.12" />
-            <stop offset="40%" stopColor="white" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          <radialGradient id={`sg-${type}`} cx="95%" cy="95%" r="50%">
+            <stop offset="0%" stopColor="#a1a1aa" stopOpacity="0.35" />
+            <stop offset="25%" stopColor="#a1a1aa" stopOpacity="0.15" />
+            <stop offset="55%" stopColor="#a1a1aa" stopOpacity="0.04" />
+            <stop offset="100%" stopColor="#a1a1aa" stopOpacity="0" />
           </radialGradient>
-          <mask id={`s-m-${type}`}>
-            <rect width="100%" height="100%" fill={`url(#s-g-${type})`} />
-          </mask>
         </defs>
-        <path
-          d={d}
-          stroke="white"
-          strokeWidth="1"
-          strokeOpacity="0.15"
-          fill="none"
-          mask={`url(#s-m-${type})`}
-        />
+        <path d={d} stroke={`url(#sg-${type})`} strokeWidth="1.5" fill="none" />
       </svg>
     </div>
   );
