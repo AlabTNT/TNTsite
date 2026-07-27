@@ -7,7 +7,7 @@ export async function GET() {
       orderBy: { timestamp: "asc" },
     });
     return NextResponse.json(activities);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch spy activities" },
       { status: 500 }
@@ -18,14 +18,17 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, description, location, timestamp, status, type } = body;
+    const { title, description, location, timestamp, timestamp2, type, flightNumber, trainNumber, departure, arrival, recurrence } = body;
 
     const activity = await prisma.spyActivity.create({
-      data: { title, description, location, timestamp, status, type },
+      data: {
+        title, description, location, timestamp, timestamp2, type,
+        flightNumber, trainNumber, departure, arrival, recurrence,
+      },
     });
 
     return NextResponse.json(activity, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create spy activity" },
       { status: 500 }

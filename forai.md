@@ -1,11 +1,1 @@
-# 关于一路楼和笔记本
-
-https://note.5dbwat4.top/Schoolwork/24A/CS1014GZ/final-prog 这是一个优秀的参考页面，我需要类似的排版、字间距、字大小和字体，但是不需要完全照抄。请维持目前的风格，改进成类似该页面的优秀展示性。
-
-一路楼可以直接写成note形式，只不过需要一个优秀的导航页面，也可以参考https://note.5dbwat4.top/contents 该页面进行。目前的页面导航有点差了。
-
-而且，我需要一个 markdown 到页面的转换，每次我写好一个markdown，note都应当自动按文件目录填写导航目录并同步。同时需要更新其他内容，并且尤其注意要删除已经被删除的markdown
-
-# 关于trip
-
-trip页面现在还算可以，保留目前的情况不变。新增一个/trip/spy 的页面，该页面用于查看AlabTNT未来的行程和推测目前所在地/目前活动。并且为此新增一个管理内容页面。整体风格是页面上半部分显示AlabTNT目前正在做什么/正在哪里，下面是AlabTNT未来的行程列表，不过这个列表要求是左侧是节点，已过去的在上面，规划中的在下面，正在进行的要被突出显示，每次都自动focus到正在进行的，并自动加载过去2次活动（如果有）和未来3次活动。整体类似于github的版本时间线那种感觉，或是参考百度event。
+可以加上。把模式改一下，Event拆成Trigger Event和Lasting Event两种，但对外都展示为Event。区别是录入timestamp时一个是触发时间，一个是持续时间。触发时间后从Upcoming改为Active，直到我手动调整为Past；Lasting Event提供两个时间戳，第一个时间戳后改为Active，第二个后改为Past；Daily指定一个时间戳和循环时间，例如指定每天/每周/每月；Travel删掉；添加一个Flight和一个Train。Flight和Train都是提供一个号码，两个地点和两个时间戳。处理逻辑与Lasting Event差不多，但注意要在Active的时候，展示页面提示AlabTNT在飞行中，无法回复消息/在高铁上，回复消息不及时。再添加一个Exam，和Lasting Event类似，只不过多一个提醒AlabTNT正在考试。另外请你检查一下同样在tnt-server上的TNTbot服务，在本机上是~/projectives/TNTbot。请你在本地应用更改，在plugins下添加一个self_sleep.py，允许QQ为1765035944的QQ号向bot发送/sleep或/睡 的指令，然后bot可以暂时修改本页面的Active为睡觉，并提示AlabTNT正在睡觉中，无法回复消息。使用/wakeup或/醒 来结束这个Active，然后恢复原来的Active内容。另外在Active Now的下面根据类型加一个SVG图表，包括Daily、Event、Sleep、Exam、Flight、Train

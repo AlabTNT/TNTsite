@@ -8,15 +8,15 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { title, description, location, timestamp, status, type } = body;
+    const { title, description, location, timestamp, timestamp2, type, flightNumber, trainNumber, departure, arrival, recurrence, manualPast } = body;
 
     const activity = await prisma.spyActivity.update({
       where: { id },
-      data: { title, description, location, timestamp, status, type },
+      data: { title, description, location, timestamp, timestamp2, type, flightNumber, trainNumber, departure, arrival, recurrence, manualPast },
     });
 
     return NextResponse.json(activity);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to update spy activity" },
       { status: 500 }
@@ -32,7 +32,7 @@ export async function DELETE(
     const { id } = await params;
     await prisma.spyActivity.delete({ where: { id } });
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to delete spy activity" },
       { status: 500 }

@@ -48,13 +48,26 @@ model TripEvent {
 }
 
 model SpyActivity {
-  id          String   @id @default(cuid())
-  title       String
-  description String?  @db.Text
-  location    String?
-  timestamp   String
-  status      String   @default("upcoming") // 'past', 'active', 'upcoming'
-  type        String   @default("event")    // 'travel', 'event', 'daily'
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String
+  description   String?  @db.Text
+  location      String?
+  timestamp     String
+  timestamp2    String?
+  type          String   @default("event")
+  flightNumber  String?
+  trainNumber   String?
+  departure     String?
+  arrival       String?
+  recurrence    String?
+  manualPast    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SpySleep {
+  id        String   @id @default("main")
+  isSleeping Boolean  @default(false)
+  startedAt DateTime?
+  updatedAt DateTime @updatedAt
 }
