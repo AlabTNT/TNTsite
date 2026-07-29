@@ -49,6 +49,8 @@ export interface SpyActivityWithStatus extends SpyActivity {
 export interface SpySleepState {
   isSleeping: boolean;
   startedAt: string | null;
+  isRiding: boolean;
+  rideStartedAt: string | null;
 }
 
 export function computeStatus(activity: SpyActivity): 'past' | 'active' | 'upcoming' {

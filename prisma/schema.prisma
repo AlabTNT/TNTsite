@@ -67,10 +67,12 @@ model SpyActivity {
 }
 
 model SpySleep {
-  id        String   @id @default("main")
-  isSleeping Boolean  @default(false)
-  startedAt DateTime?
-  updatedAt DateTime @updatedAt
+  id            String    @id @default("main")
+  isSleeping    Boolean   @default(false)
+  startedAt     DateTime?
+  isRiding      Boolean   @default(false)
+  rideStartedAt DateTime?
+  updatedAt     DateTime  @updatedAt
 }
 
 model SpyCredential {

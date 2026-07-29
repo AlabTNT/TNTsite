@@ -8,6 +8,7 @@ export async function GET() {
   try {
     let sleep = await prisma.spySleep.findUnique({ where: { id: "main" } });
     const isSleeping = sleep?.isSleeping ?? false;
+    const isRiding = sleep?.isRiding ?? false;
 
     const activities = await prisma.spyActivity.findMany();
     const activeActivities = activities.filter(a => computeStatus(a as any) === "active");
@@ -20,6 +21,10 @@ export async function GET() {
       status = "sleeping";
       msgStatus = "must";
       reason = "Sleeping";
+    } else if (isRiding) {
+      status = "must";
+      msgStatus = "must";
+      reason = "骑小龟";
     } else if (activeActivities.length > 0) {
       const hasMust = activeActivities.some(a => a.msgStatus === "must");
       const hasMaybe = activeActivities.some(a => a.msgStatus === "maybe");
@@ -36,11 +41,12 @@ export async function GET() {
     }
 
     return NextResponse.json({
-      active: isSleeping || activeActivities.length > 0,
+      active: isSleeping || isRiding || activeActivities.length > 0,
       status,
       msgStatus,
       reason,
       isSleeping,
+      isRiding,
       activities: activeActivities,
     });
   } catch {
