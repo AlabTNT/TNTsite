@@ -60,6 +60,7 @@ model SpyActivity {
   departure     String?
   arrival       String?
   recurrence    String?
+  msgStatus     String   @default("none")
   manualPast    Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -70,4 +71,14 @@ model SpySleep {
   isSleeping Boolean  @default(false)
   startedAt DateTime?
   updatedAt DateTime @updatedAt
+}
+
+model SpyCredential {
+  id           String   @id
+  publicKey    String   @db.Text
+  counter      Int
+  deviceType   String
+  backedUp     Boolean
+  transports   String?
+  createdAt    DateTime @default(now())
 }

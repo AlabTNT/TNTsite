@@ -13,6 +13,8 @@
     "@monaco-editor/react": "^4.7.0",
     "@myriaddreamin/typst-ts-node-compiler": "^0.7.0",
     "@prisma/client": "^6.19.3",
+    "@simplewebauthn/browser": "^13.3.0",
+    "@simplewebauthn/server": "^13.3.2",
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",

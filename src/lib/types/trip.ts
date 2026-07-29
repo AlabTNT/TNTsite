@@ -36,6 +36,7 @@ export interface SpyActivity {
   departure: string | null;
   arrival: string | null;
   recurrence: string | null;
+  msgStatus: 'none' | 'maybe' | 'must';
   manualPast: boolean;
   createdAt: string;
   updatedAt: string;
@@ -76,7 +77,7 @@ export function computeStatus(activity: SpyActivity): 'past' | 'active' | 'upcom
   return 'upcoming';
 }
 
-function parseTimestamp(ts: string): Date {
+export function parseTimestamp(ts: string): Date {
   const d = new Date(ts);
   if (!isNaN(d.getTime())) return d;
 

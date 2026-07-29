@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Clock, Activity, Radio, Plane, Train, BookOpen, Moon, Calendar, Repeat } from "lucide-react";
 import Link from "next/link";
-import { computeStatus, SpyType, SpyActivity } from "@/lib/types/trip";
+import { computeStatus, SpyType, SpyActivity, parseTimestamp } from "@/lib/types/trip";
 
 interface SpyActivityWithStatus extends SpyActivity {
   computedStatus: string;
@@ -31,24 +31,23 @@ const TYPE_MESSAGES: Record<string, string> = {
 };
 
 function SpyDecoration({ type }: { type: string }) {
-  const paths: Record<string, string> = {
-    flight: "M22 2L11.5 16H3l4 3-4 3h8.5L22 22l2-10-2-10zm-4 10l2 4-2 4-2-4 2-4z",
-    train: "M4 11V6h16v5H4zm0 2h16v2H4v-2zM6 3h12c1.1 0 2 .9 2 2v1H4V5c0-1.1 .9-2 2-2zM5 18v2h3v-2h8v2h3v-2M7 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z",
-    exam: "M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h16V5H4zm4 3h4M8 11h8M8 15h6",
-    sleep: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
-    daily: "M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM7 13h3M7 16h3",
-    trigger_event: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
-    lasting_event: "M8 2v20M16 2v20M3 8h4M17 8h4M3 14h4M17 14h4M3 20h4M17 20h4",
-    default: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
-  };
-
-  const d = paths[type] || paths.default;
+  const IconComponent = {
+    flight: Plane,
+    train: Train,
+    exam: BookOpen,
+    sleep: Moon,
+    daily: Repeat,
+  }[type] || Radio;
 
   return (
-    <div className="absolute right-[3.5rem] bottom-[3rem] w-[63px] h-[63px] md:w-[81px] md:h-[81px] pointer-events-none select-none z-0">
-      <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="1.2" opacity="0.35" xmlns="http://www.w3.org/2000/svg">
-        <path d={d} />
-      </svg>
+    <div 
+      className="absolute -right-3 -bottom-7 w-24 h-24 md:w-36 md:h-36 pointer-events-none select-none z-0 text-zinc-400 opacity-[0.25]"
+      style={{
+        WebkitMaskImage: "linear-gradient(135deg, black 30%, transparent 90%)",
+        maskImage: "linear-gradient(135deg, black 30%, transparent 90%)",
+      }}
+    >
+      <IconComponent className="w-full h-full stroke-[1.1]" />
     </div>
   );
 }
@@ -58,6 +57,12 @@ export default function SpyPage() {
   const [activities, setActivities] = useState<SpyActivity[]>([]);
   const [sleepState, setSleepState] = useState<SpySleepState>({ isSleeping: false, startedAt: null });
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const [visibleFutureCount, setVisibleFutureCount] = useState(5);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     Promise.all([
@@ -76,20 +81,133 @@ export default function SpyPage() {
     computedStatus: computeStatus(a),
   }));
 
-  const pastActivities = withStatus.filter(a => a.computedStatus === "past");
   const activeActivities = withStatus.filter(a => a.computedStatus === "active");
-  const upcomingActivities = withStatus.filter(a => a.computedStatus === "upcoming");
 
-  const visiblePast = pastActivities.slice(-2);
-  const visibleUpcoming = upcomingActivities.slice(0, 3);
+  // Build timeline points with Start/End split for lasting events
+  interface TimelinePoint {
+    id: string;
+    time: Date;
+    label: string;
+    activity: SpyActivity;
+    isStart: boolean;
+    isEnd: boolean;
+    isNow: boolean;
+  }
+
+  const getStartLabel = (activity: SpyActivity) => {
+    if (activity.type === 'flight') return `${activity.title} (Takeoff)`;
+    if (activity.type === 'train') return `${activity.title} (Departure)`;
+    return `${activity.title} (Start)`;
+  };
+
+  const getEndLabel = (activity: SpyActivity) => {
+    if (activity.type === 'flight') return `${activity.title} (Landing)`;
+    if (activity.type === 'train') return `${activity.title} (Arrival)`;
+    return `${activity.title} (End)`;
+  };
+
+  const timelinePoints: TimelinePoint[] = [];
+
+  activities.forEach(activity => {
+    const isLasting = ['flight', 'train', 'exam', 'lasting_event'].includes(activity.type);
+    const t1 = parseTimestamp(activity.timestamp);
+    
+    if (isLasting && activity.timestamp2) {
+      const t2 = parseTimestamp(activity.timestamp2);
+      timelinePoints.push({
+        id: `${activity.id}-start`,
+        time: t1,
+        label: getStartLabel(activity),
+        activity,
+        isStart: true,
+        isEnd: false,
+        isNow: false
+      });
+      timelinePoints.push({
+        id: `${activity.id}-end`,
+        time: t2,
+        label: getEndLabel(activity),
+        activity,
+        isStart: false,
+        isEnd: true,
+        isNow: false
+      });
+    } else {
+      timelinePoints.push({
+        id: activity.id,
+        time: t1,
+        label: activity.title,
+        activity,
+        isStart: false,
+        isEnd: false,
+        isNow: false
+      });
+    }
+  });
+
+  // Calculate highlit boundaries and slice points
+  let visiblePoints: TimelinePoint[] = [];
+  let futurePoints: TimelinePoint[] = [];
+  let earliestStart: Date | null = null;
+  let latestEnd: Date | null = null;
+
+  if (mounted && activities.length > 0) {
+    const nowTime = new Date();
+    
+    // Add Now Node
+    timelinePoints.push({
+      id: "now-node",
+      time: nowTime,
+      label: "CURRENT TIME",
+      activity: {
+        id: "now",
+        title: "NOW",
+        type: "trigger_event",
+      } as any,
+      isStart: false,
+      isEnd: false,
+      isNow: true
+    });
+
+    // Sort chronologically
+    timelinePoints.sort((a, b) => a.time.getTime() - b.time.getTime());
+
+    // Compute active lasting events at nowTime
+    const activeLastingEvents = activities.filter(a => {
+      const isLasting = ['flight', 'train', 'exam', 'lasting_event'].includes(a.type);
+      if (!isLasting || !a.timestamp2) return false;
+      const t1 = parseTimestamp(a.timestamp);
+      const t2 = parseTimestamp(a.timestamp2);
+      return t1 <= nowTime && nowTime <= t2;
+    });
+
+    if (activeLastingEvents.length > 0) {
+      const starts = activeLastingEvents.map(a => parseTimestamp(a.timestamp).getTime());
+      const ends = activeLastingEvents.map(a => parseTimestamp(a.timestamp2!).getTime());
+      earliestStart = new Date(Math.min(...starts));
+      latestEnd = new Date(Math.max(...ends));
+    }
+
+    // Slice timeline: 2 past, NOW, visibleFutureCount upcoming
+    const nowIndex = timelinePoints.findIndex(p => p.isNow);
+    if (nowIndex !== -1) {
+      const pastPoints = timelinePoints.slice(0, nowIndex).slice(-2);
+      futurePoints = timelinePoints.slice(nowIndex + 1);
+      const slicedFuturePoints = futurePoints.slice(0, visibleFutureCount);
+      visiblePoints = [...pastPoints, timelinePoints[nowIndex], ...slicedFuturePoints];
+    }
+  } else if (!loading) {
+    timelinePoints.sort((a, b) => a.time.getTime() - b.time.getTime());
+    visiblePoints = timelinePoints;
+  }
 
   useEffect(() => {
-    if (currentRef.current && activeActivities.length > 0) {
+    if (currentRef.current && mounted) {
       setTimeout(() => {
         currentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
       }, 300);
     }
-  }, [activeActivities.length, loading]);
+  }, [mounted, loading]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
@@ -137,10 +255,26 @@ export default function SpyPage() {
                   flight: { border: 'border-pink-500/20', bg: 'from-pink-500/10', text: 'text-pink-400', dot: 'bg-pink-500' },
                   train: { border: 'border-yellow-500/20', bg: 'from-yellow-500/10', text: 'text-yellow-400', dot: 'bg-yellow-500' },
                   exam: { border: 'border-red-500/20', bg: 'from-red-500/10', text: 'text-red-400', dot: 'bg-red-500' },
+                  maybe: { border: 'border-yellow-500/20', bg: 'from-yellow-500/10', text: 'text-yellow-400', dot: 'bg-yellow-500' },
+                  must: { border: 'border-red-500/20', bg: 'from-red-500/10', text: 'text-red-400', dot: 'bg-red-500' },
                   default: { border: 'border-[#C23D1A]/20', bg: 'from-[#C23D1A]/10', text: 'text-[#C23D1A]', dot: 'bg-[#C23D1A]' },
                 };
-                const c = colorMap[activity.type] || colorMap.default;
+                let c = colorMap[activity.type];
+                if (!c && activity.msgStatus && activity.msgStatus !== "none") {
+                  c = colorMap[activity.msgStatus];
+                }
+                if (!c) {
+                  c = colorMap.default;
+                }
                 const isSpecial = ['flight', 'train', 'exam'].includes(activity.type);
+                let statusMessage = "";
+                if (isSpecial) {
+                  statusMessage = TYPE_MESSAGES[activity.type];
+                } else if (activity.msgStatus === "maybe") {
+                  statusMessage = "AlabTNT replies may be delayed. (Replies may be delayed / 可能无法及时回复)";
+                } else if (activity.msgStatus === "must") {
+                  statusMessage = "AlabTNT cannot check messages right now. (Cannot check messages / 暂时无法查看消息)";
+                }
 
                 return (
                   <motion.div key={activity.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className={`relative overflow-hidden rounded-2xl border ${c.border} bg-gradient-to-br ${c.bg} to-transparent p-6 md:p-10`}>
@@ -155,7 +289,7 @@ export default function SpyPage() {
                       {TYPE_ICONS[activity.type] || <Activity className={`w-6 h-6 ${c.text} mt-0.5 shrink-0`} />}
                       <h2 className="text-2xl md:text-3xl font-bold text-white">{activity.title}</h2>
                     </div>
-                    {isSpecial && <p className="text-zinc-300 text-lg leading-relaxed max-w-2xl ml-9 mb-3">{TYPE_MESSAGES[activity.type]}</p>}
+                    {statusMessage && <p className="text-zinc-300 text-lg leading-relaxed max-w-2xl ml-9 mb-3">{statusMessage}</p>}
                     {activity.description && <p className="text-zinc-400 text-base leading-relaxed max-w-2xl ml-9">{activity.description}</p>}
                     <div className="flex flex-wrap items-center gap-4 mt-4 ml-9">
                       {activity.location && <span className="flex items-center gap-1.5 text-sm text-zinc-400"><MapPin className="w-4 h-4" />{activity.location}</span>}
@@ -187,17 +321,51 @@ export default function SpyPage() {
                 <div className="flex-1 h-px bg-white/5" />
               </div>
 
-              <div className="relative pl-8 md:pl-10">
-                <div className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+              <div className="relative">
+                {visiblePoints.map((point, index) => {
+                  const isLast = index === visiblePoints.length - 1;
+                  
+                  let isHighlightedLine = false;
+                  if (!isLast && earliestStart && latestEnd) {
+                    const nextPoint = visiblePoints[index + 1];
+                    isHighlightedLine = point.time >= earliestStart && nextPoint.time <= latestEnd;
+                  }
 
-                {visiblePast.map(activity => (<TimelineNode key={activity.id} activity={activity} />))}
-                {activeActivities.map(activity => (
-                  <div key={activity.id} ref={currentRef}><TimelineNode activity={activity} /></div>
-                ))}
-                {visibleUpcoming.map(activity => (<TimelineNode key={activity.id} activity={activity} />))}
+                  const isHighlightedNode = earliestStart && latestEnd
+                    ? (point.time >= earliestStart && point.time <= latestEnd)
+                    : false;
 
-                {activities.length === 0 && (
+                  return (
+                    <TimelineNode 
+                      key={point.id} 
+                      point={point} 
+                      isLast={isLast}
+                      isHighlightedLine={isHighlightedLine}
+                      isHighlightedNode={isHighlightedNode}
+                      currentRef={point.isNow ? currentRef : undefined}
+                    />
+                  );
+                })}
+
+                {visiblePoints.length === 0 && (
                   <div className="py-8 text-center text-zinc-600 text-sm">No timeline entries yet.</div>
+                )}
+
+                {mounted && activities.length > 0 && (
+                  <div className="mt-8 flex justify-center">
+                    {visibleFutureCount < futurePoints.length ? (
+                      <button
+                        onClick={() => setVisibleFutureCount(prev => prev + 5)}
+                        className="text-xs font-semibold text-zinc-500 hover:text-zinc-300 transition-colors py-2 px-4 rounded bg-white/[0.02] border border-white/5 hover:border-white/10 cursor-pointer"
+                      >
+                        Load More
+                      </button>
+                    ) : (
+                      <div className="text-zinc-600 tracking-widest text-xs select-none">
+                        -----·-----
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
             </section>
@@ -208,25 +376,192 @@ export default function SpyPage() {
   );
 }
 
-function TimelineNode({ activity }: { activity: SpyActivityWithStatus }) {
-  const isActive = activity.computedStatus === "active";
+function RadarNode() {
   return (
-    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="relative pb-10 last:pb-0">
-      <div className={`absolute -left-8 md:-left-10 w-3.5 h-3.5 rounded-full border-2 z-10 ${isActive ? "border-[#C23D1A] bg-[#C23D1A]" : "border-zinc-600 bg-[#0a0a0a]"}`} style={{ top: "4px" }}>
-        {isActive && <span className="absolute inset-0 rounded-full bg-[#C23D1A] animate-ping opacity-30" />}
+    <div className="relative w-4 h-4 flex items-center justify-center">
+      <style>{`
+        @keyframes radar-pulse-1 {
+          0% {
+            transform: scale(0.8);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.4;
+          }
+          100% {
+            transform: scale(3.5);
+            opacity: 0;
+          }
+        }
+        @keyframes radar-pulse-2 {
+          0% {
+            transform: scale(0.8);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.25;
+          }
+          100% {
+            transform: scale(4.8);
+            opacity: 0;
+          }
+        }
+        .radar-ring-1 {
+          animation: radar-pulse-1 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+        .radar-ring-2 {
+          animation: radar-pulse-2 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+          animation-delay: 1.2s;
+        }
+      `}</style>
+      {/* Outer pulsing ring 1 */}
+      <div className="absolute w-full h-full rounded-full bg-blue-500 radar-ring-1" />
+      {/* Outer pulsing ring 2 */}
+      <div className="absolute w-full h-full rounded-full bg-blue-500 radar-ring-2" />
+      {/* Center core dot */}
+      <div className="w-2.5 h-2.5 rounded-full bg-blue-400 z-10 shadow-lg shadow-blue-400/50" />
+    </div>
+  );
+}
+
+function TimelineNode({ 
+  point, 
+  isLast, 
+  isHighlightedLine,
+  isHighlightedNode, 
+  currentRef 
+}: { 
+  point: any; 
+  isLast: boolean; 
+  isHighlightedLine: boolean;
+  isHighlightedNode: boolean; 
+  currentRef?: React.RefObject<HTMLDivElement | null>;
+}) {
+  const { activity, isStart, isEnd, isNow, label, time } = point;
+
+  const formatTime = (d: Date) => {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+
+  return (
+    <motion.div 
+      ref={currentRef as any}
+      initial={{ opacity: 0, x: -20 }} 
+      animate={{ opacity: 1, x: 0 }} 
+      className="relative pb-10 last:pb-0 pl-8 md:pl-10"
+    >
+      {/* Line Segment to Next Node */}
+      {!isLast && (
+        <div 
+          className={`absolute top-[18px] bottom-0 w-0.5 transition-colors duration-500 left-[11px] ${
+            isHighlightedLine ? "bg-[#C23D1A]" : "bg-white/10"
+          }`}
+        />
+      )}
+
+      {/* Indicator Dot */}
+      <div 
+        className="absolute left-[5px] top-[-1px] z-10 flex items-center justify-center"
+        style={{ width: '14px', height: '14px' }}
+      >
+        {isNow ? (
+          <RadarNode />
+        ) : (
+          <div 
+            className={`w-3.5 h-3.5 rounded-full border-2 bg-[#0a0a0a] transition-all duration-500 ${
+              isHighlightedNode ? "border-[#C23D1A] bg-[#C23D1A]" : "border-zinc-600"
+            }`}
+          >
+            {isHighlightedNode && (
+              <span className="absolute inset-0 rounded-full bg-[#C23D1A] animate-ping opacity-30" />
+            )}
+          </div>
+        )}
       </div>
-      <div className={isActive ? "opacity-100" : "opacity-60"}>
+
+      {/* Content */}
+      <div className={isHighlightedNode || isNow ? "opacity-100" : "opacity-60"}>
         <span className="text-[11px] font-medium text-zinc-600 mb-1 flex items-center gap-1.5">
-          {activity.timestamp}{activity.timestamp2 && <span>— {activity.timestamp2}</span>}
+          <Clock className="w-3 h-3" />
+          {formatTime(time)}
         </span>
-        <h3 className={`text-sm font-semibold ${isActive ? "text-white" : "text-zinc-400"}`}>
-          <span className="mr-1.5">{TYPE_ICONS[activity.type]}</span>{activity.title}
+        
+        <h3 className={`text-sm font-semibold flex items-center gap-1.5 ${
+          isNow ? "text-blue-400" : (isHighlightedNode ? "text-white" : "text-zinc-400")
+        }`}>
+          {!isNow && <span className="text-zinc-500">{TYPE_ICONS[activity.type]}</span>}
+          {label}
         </h3>
-        {activity.description && <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">{activity.description}</p>}
-        {activity.location && <span className="inline-flex items-center gap-1 text-[11px] text-zinc-600 mt-1"><MapPin className="w-3 h-3" />{activity.location}</span>}
-        {activity.flightNumber && <span className="ml-2 text-[10px] font-mono text-pink-400">{activity.flightNumber}</span>}
-        {activity.trainNumber && <span className="ml-2 text-[10px] font-mono text-yellow-400">{activity.trainNumber}</span>}
+
+        {!isNow && (
+          <>
+            {activity.description && !isEnd && (
+              <p className="text-xs text-zinc-500 mt-1 leading-relaxed">{activity.description}</p>
+            )}
+
+            <div className="flex flex-wrap items-center gap-2 mt-1">
+              {activity.location && (
+                <span className="inline-flex items-center gap-1 text-[11px] text-zinc-600">
+                  <MapPin className="w-3 h-3" />
+                  {activity.location}
+                </span>
+              )}
+              
+              {activity.type === 'flight' && (
+                <>
+                  {activity.flightNumber && (
+                    <span className="text-[10px] font-mono text-pink-400/80 bg-pink-500/5 px-1.5 py-0.5 rounded">
+                      {activity.flightNumber}
+                    </span>
+                  )}
+                  {isStart && activity.departure && (
+                    <span className="text-[11px] text-zinc-500 font-medium">
+                      Departing from {activity.departure}
+                    </span>
+                  )}
+                  {isEnd && activity.arrival && (
+                    <span className="text-[11px] text-zinc-500 font-medium">
+                      Arriving at {activity.arrival}
+                    </span>
+                  )}
+                </>
+              )}
+
+              {activity.type === 'train' && (
+                <>
+                  {activity.trainNumber && (
+                    <span className="text-[10px] font-mono text-yellow-400/80 bg-yellow-500/5 px-1.5 py-0.5 rounded">
+                      {activity.trainNumber}
+                    </span>
+                  )}
+                  {isStart && activity.departure && (
+                    <span className="text-[11px] text-zinc-500 font-medium">
+                      Departing from {activity.departure}
+                    </span>
+                  )}
+                  {isEnd && activity.arrival && (
+                    <span className="text-[11px] text-zinc-500 font-medium">
+                      Arriving at {activity.arrival}
+                    </span>
+                  )}
+                </>
+              )}
+              {activity.msgStatus === "maybe" && (
+                <span className="text-[10px] font-medium text-yellow-400/90 bg-yellow-500/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+                  ⚠️ 可能无法及时回复
+                </span>
+              )}
+              {activity.msgStatus === "must" && (
+                <span className="text-[10px] font-medium text-red-400/90 bg-red-500/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+                  🚫 暂时无法看消息
+                </span>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </motion.div>
   );
 }
+

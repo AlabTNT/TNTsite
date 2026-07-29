@@ -13,8 +13,15 @@ export async function GET() {
   }
 }
 
+import { authorizeRequest } from "@/lib/spy-auth";
+
 export async function POST(request: Request) {
   try {
+    const authorized = await authorizeRequest(request);
+    if (!authorized) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { isSleeping } = body;
 
